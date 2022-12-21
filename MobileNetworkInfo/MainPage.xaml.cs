@@ -5,37 +5,98 @@ namespace MobileNetworkInfo;
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
+    int count = 0;
 
-	public MainPage()
-	{
-		InitializeComponent();
-        ReadDeviceInfo();
-        Battery.Default.BatteryInfoChanged += Battery_BatteryInfoChanged;
+    PermissionStatus locationPermission;
+    PermissionStatus sensorsPermission;
+    PermissionStatus batteryPermission;
+    PermissionStatus networkPermission;
 
-        // Turn on accelerometer
-        Accelerometer.Default.ReadingChanged += Accelerometer_ReadingChanged;
-        Accelerometer.Default.Start(SensorSpeed.UI);
+    public MainPage()
+    {
+        InitializeComponent();
 
-        // Turn on accelerometer
-        Barometer.Default.ReadingChanged += Barometer_ReadingChanged;
-        Barometer.Default.Start(SensorSpeed.UI);
+        Device.BeginInvokeOnMainThread(async () =>
+        {
 
-        // Turn on compass
-        Compass.Default.ReadingChanged += Compass_ReadingChanged;
-        Compass.Default.Start(SensorSpeed.UI);
+            CheckAndRequestLocationPermission();
+            CheckAndRequestNetworkPermission();
+            CheckAndRequestBatteryPermission();
+            CheckAndRequestSensorPermission();
 
-        // Turn on compass
-        Gyroscope.Default.ReadingChanged += Gyroscope_ReadingChanged;
-        Gyroscope.Default.Start(SensorSpeed.UI);
+            ReadDeviceInfo();
 
-        // Turn on compass
-        Magnetometer.Default.ReadingChanged += Magnetometer_ReadingChanged;
-        Magnetometer.Default.Start(SensorSpeed.UI);
+            Battery.Default.BatteryInfoChanged += Battery_BatteryInfoChanged;
 
-        // Turn on compass
-        OrientationSensor.Default.ReadingChanged += Orientation_ReadingChanged;
-        OrientationSensor.Default.Start(SensorSpeed.UI);
+            try
+            {
+                // Turn on accelerometer
+                Accelerometer.Default.ReadingChanged += Accelerometer_ReadingChanged;
+                Accelerometer.Default.Start(SensorSpeed.UI);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            try
+            {
+                // Turn on Barometer
+                Barometer.Default.ReadingChanged += Barometer_ReadingChanged;
+                Barometer.Default.Start(SensorSpeed.UI);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            try
+            {
+                // Turn on compass
+                Compass.Default.ReadingChanged += Compass_ReadingChanged;
+                Compass.Default.Start(SensorSpeed.UI);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            try
+            {
+                // Turn on Gyroscope
+                Gyroscope.Default.ReadingChanged += Gyroscope_ReadingChanged;
+                Gyroscope.Default.Start(SensorSpeed.UI);
+
+
+            }
+            catch (Exception ex)
+            {
+                lblBarometer.IsVisible = false;
+            }
+
+            try
+            {
+                // Turn on Magnetometer
+                Magnetometer.Default.ReadingChanged += Magnetometer_ReadingChanged;
+                Magnetometer.Default.Start(SensorSpeed.UI);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            try
+            {
+                // Turn on OrientationSensor
+                OrientationSensor.Default.ReadingChanged += Orientation_ReadingChanged;
+                OrientationSensor.Default.Start(SensorSpeed.UI);
+            }
+            catch (Exception ex)
+            {
+
+            }
+        });
+
 
     }
 
@@ -51,18 +112,26 @@ public partial class MainPage : ContentPage
 
     private void Magnetometer_ReadingChanged(object sender, MagnetometerChangedEventArgs e)
     {
-        lblMagnetometer.Text = e.Reading.ToString();
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        sb.AppendLine($"X : {e.Reading.MagneticField.X}");
+        sb.AppendLine($"Y : {e.Reading.MagneticField.Y}");
+        sb.AppendLine($"Z : {e.Reading.MagneticField.Z}");
+        lblMagnetometer.Text = sb.ToString();
     }
 
     private void Gyroscope_ReadingChanged(object sender, GyroscopeChangedEventArgs e)
     {
-        lblGyroscope.Text = e.Reading.ToString();
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        sb.AppendLine($"X : {e.Reading.AngularVelocity.X}");
+        sb.AppendLine($"Y : {e.Reading.AngularVelocity.Y}");
+        sb.AppendLine($"Z : {e.Reading.AngularVelocity.Z}");
+        lblGyroscope.Text = sb.ToString();
     }
 
     private void Compass_ReadingChanged(object sender, CompassChangedEventArgs e)
     {
         lblCompass.Text = e.Reading.HeadingMagneticNorth.ToString();
-        imgCompass.RotateTo((e.Reading.HeadingMagneticNorth) * 250/360);
+        imgCompass.RotateTo((e.Reading.HeadingMagneticNorth) * 250 / 360);
     }
 
     private void Barometer_ReadingChanged(object sender, BarometerChangedEventArgs e)
@@ -73,7 +142,11 @@ public partial class MainPage : ContentPage
     private void Accelerometer_ReadingChanged(object sender, AccelerometerChangedEventArgs e)
     {
         // Update UI Label with accelerometer state
-        lblAccel.Text = e.Reading.ToString();
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        sb.AppendLine($"X : {e.Reading.Acceleration.X}");
+        sb.AppendLine($"Y : {e.Reading.Acceleration.Y}");
+        sb.AppendLine($"Z : {e.Reading.Acceleration.Z}");
+        lblAccel.Text = sb.ToString();
     }
 
     private void Battery_BatteryInfoChanged(object sender, BatteryInfoChangedEventArgs e)
@@ -87,6 +160,15 @@ public partial class MainPage : ContentPage
             BatteryState.NotPresent => "Battery is not available.",
             BatteryState.Unknown => "Battery is unknown",
             _ => "Battery is unknown"
+        };
+
+        lblPowerSource.Text = Battery.Default.PowerSource switch
+        {
+            BatteryPowerSource.Wireless => "Wireless charging",
+            BatteryPowerSource.Usb => "USB cable charging",
+            BatteryPowerSource.AC => "Device is plugged in to a power source",
+            BatteryPowerSource.Battery => "Device isn't charging",
+            _ => "Unknown"
         };
     }
 
@@ -102,23 +184,111 @@ public partial class MainPage : ContentPage
         lblPlatform.Text = DeviceInfo.Current.Platform.ToString();
         lblDeviceType.Text = DeviceInfo.Current.DeviceType.ToString();
 
-        
+
         lblPixelWidth.Text = DeviceDisplay.Current.MainDisplayInfo.Width.ToString();
         lblPixelHeight.Text = DeviceDisplay.Current.MainDisplayInfo.Height.ToString();
         lblDensity.Text = DeviceDisplay.Current.MainDisplayInfo.Density.ToString();
         lblOrientation.Text = DeviceDisplay.Current.MainDisplayInfo.Orientation.ToString();
         lblRotation.Text = DeviceDisplay.Current.MainDisplayInfo.Rotation.ToString();
         lblRefreshRate.Text = DeviceDisplay.Current.MainDisplayInfo.RefreshRate.ToString("##.##");
-        
-        lblPowerSource.Text = Battery.Default.PowerSource switch
-        {
-            BatteryPowerSource.Wireless => "Wireless charging",
-            BatteryPowerSource.Usb => "USB cable charging",
-            BatteryPowerSource.AC => "Device is plugged in to a power source",
-            BatteryPowerSource.Battery => "Device isn't charging",
-            _ => "Unknown"
-        };
 
+        
+    }
+
+    public async Task<PermissionStatus> CheckAndRequestLocationPermission()
+    {
+        PermissionStatus locationPermission = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+
+        if (locationPermission == PermissionStatus.Granted)
+            return locationPermission;
+
+        if (locationPermission == PermissionStatus.Denied && DeviceInfo.Platform == DevicePlatform.iOS)
+        {
+            // Prompt the user to turn on in settings
+            // On iOS once a permission has been denied it may not be requested again from the application
+            return locationPermission;
+        }
+
+        if (Permissions.ShouldShowRationale<Permissions.LocationWhenInUse>())
+        {
+            // Prompt the user with additional information as to why the permission is needed
+        }
+
+        locationPermission = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+
+        return locationPermission;
+    }
+
+    public async Task<PermissionStatus> CheckAndRequestNetworkPermission()
+    {
+        PermissionStatus networkPermission = await Permissions.CheckStatusAsync<Permissions.NetworkState>();
+
+        if (networkPermission == PermissionStatus.Granted)
+            return networkPermission;
+
+        if (networkPermission == PermissionStatus.Denied && DeviceInfo.Platform == DevicePlatform.iOS)
+        {
+            // Prompt the user to turn on in settings
+            // On iOS once a permission has been denied it may not be requested again from the application
+            return networkPermission;
+        }
+
+        if (Permissions.ShouldShowRationale<Permissions.NetworkState>())
+        {
+            // Prompt the user with additional information as to why the permission is needed
+        }
+
+        networkPermission = await Permissions.RequestAsync<Permissions.NetworkState>();
+
+        return networkPermission;
+    }
+
+    public async Task<PermissionStatus> CheckAndRequestBatteryPermission()
+    {
+        PermissionStatus batteryPermission = await Permissions.CheckStatusAsync<Permissions.Battery>();
+
+        if (batteryPermission == PermissionStatus.Granted)
+            return batteryPermission;
+
+        if (batteryPermission == PermissionStatus.Denied && DeviceInfo.Platform == DevicePlatform.iOS)
+        {
+            // Prompt the user to turn on in settings
+            // On iOS once a permission has been denied it may not be requested again from the application
+            return batteryPermission;
+        }
+
+        if (Permissions.ShouldShowRationale<Permissions.Battery>())
+        {
+            // Prompt the user with additional information as to why the permission is needed
+        }
+
+        batteryPermission = await Permissions.RequestAsync<Permissions.Battery>();
+
+        return batteryPermission;
+    }
+
+    public async Task<PermissionStatus> CheckAndRequestSensorPermission()
+    {
+        PermissionStatus sensorPermission = await Permissions.CheckStatusAsync<Permissions.Sensors>();
+
+        if (sensorPermission == PermissionStatus.Granted)
+            return sensorPermission;
+
+        if (sensorPermission == PermissionStatus.Denied && DeviceInfo.Platform == DevicePlatform.iOS)
+        {
+            // Prompt the user to turn on in settings
+            // On iOS once a permission has been denied it may not be requested again from the application
+            return sensorPermission;
+        }
+
+        if (Permissions.ShouldShowRationale<Permissions.Sensors>())
+        {
+            // Prompt the user with additional information as to why the permission is needed
+        }
+
+        sensorPermission = await Permissions.RequestAsync<Permissions.Sensors>();
+
+        return sensorPermission;
     }
 }
 

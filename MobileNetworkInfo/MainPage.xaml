@@ -59,6 +59,7 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
             <Label Grid.Column="0" Grid.Row="0"  ></Label>
@@ -182,21 +183,21 @@
 
             <Label Grid.Column="0" Grid.Row="43"  ></Label>
 
-            <Label Grid.Column="0" Grid.Row="43" Text="Gyroscope"></Label>
-            <Label Grid.Column="1" Grid.Row="43" Text=":"></Label>
-            <Label Grid.Column="2" Grid.Row="43" x:Name="lblGyroscope"></Label>
+            <Label Grid.Column="0" Grid.Row="44" Text="Gyroscope"></Label>
+            <Label Grid.Column="1" Grid.Row="44" Text=":"></Label>
+            <Label Grid.Column="2" Grid.Row="44" x:Name="lblGyroscope"></Label>
 
-            <Label Grid.Column="0" Grid.Row="44"  ></Label>
+            <Label Grid.Column="0" Grid.Row="45"  ></Label>
 
-            <Label Grid.Column="0" Grid.Row="45" Text="Magnetometer"></Label>
-            <Label Grid.Column="1" Grid.Row="45" Text=":"></Label>
-            <Label Grid.Column="2" Grid.Row="45" x:Name="lblMagnetometer"></Label>
+            <Label Grid.Column="0" Grid.Row="46" Text="Magnetometer"></Label>
+            <Label Grid.Column="1" Grid.Row="46" Text=":"></Label>
+            <Label Grid.Column="2" Grid.Row="46" x:Name="lblMagnetometer"></Label>
 
-            <Label Grid.Column="0" Grid.Row="46"  ></Label>
+            <Label Grid.Column="0" Grid.Row="47"  ></Label>
 
-            <Label Grid.Column="0" Grid.Row="47" Text="Orientation Sensor"></Label>
-            <Label Grid.Column="1" Grid.Row="47" Text=":"></Label>
-            <Label Grid.Column="2" Grid.Row="47" x:Name="lblOrientationSensor" FontSize="Small"></Label>
+            <Label Grid.Column="0" Grid.Row="48" Text="Orientation Sensor"></Label>
+            <Label Grid.Column="1" Grid.Row="48" Text=":"></Label>
+            <Label Grid.Column="2" Grid.Row="48" x:Name="lblOrientationSensor" FontSize="Small"></Label>
 
             
 
