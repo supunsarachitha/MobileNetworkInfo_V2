@@ -60,6 +60,11 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
             <Label Grid.Column="0" Grid.Row="0"  ></Label>
@@ -199,7 +204,12 @@
             <Label Grid.Column="1" Grid.Row="48" Text=":"></Label>
             <Label Grid.Column="2" Grid.Row="48" x:Name="lblOrientationSensor" FontSize="Small"></Label>
 
-            
+            <Label Grid.Column="0" Grid.Row="49"  ></Label>
+
+             <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="50" Text="Other Information" FontAttributes="Bold" HorizontalOptions="Start" ></Label>
+            <Label Grid.Column="0" Grid.Row="51"  ></Label>
+
+            <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="52" Text="" x:Name="temp"></Label>
 
         </Grid>
     </ScrollView>

@@ -19,10 +19,10 @@ public partial class MainPage : ContentPage
         Device.BeginInvokeOnMainThread(async () =>
         {
 
-            CheckAndRequestLocationPermission();
-            CheckAndRequestNetworkPermission();
-            CheckAndRequestBatteryPermission();
-            CheckAndRequestSensorPermission();
+            await CheckAndRequestLocationPermission();
+            await CheckAndRequestNetworkPermission();
+            await CheckAndRequestBatteryPermission();
+            await CheckAndRequestSensorPermission();
 
             ReadDeviceInfo();
 
@@ -103,49 +103,49 @@ public partial class MainPage : ContentPage
     private void Orientation_ReadingChanged(object sender, OrientationSensorChangedEventArgs e)
     {
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
-        sb.AppendLine($"X : {e.Reading.Orientation.X}");
-        sb.AppendLine($"Y : {e.Reading.Orientation.Y}");
-        sb.AppendLine($"Z : {e.Reading.Orientation.Z}");
-        sb.AppendLine($"W : {e.Reading.Orientation.W}");
+        sb.AppendLine($"X : {e.Reading.Orientation.X.ToString("N3")}");
+        sb.AppendLine($"Y : {e.Reading.Orientation.Y.ToString("N3")}");
+        sb.AppendLine($"Z : {e.Reading.Orientation.Z.ToString("N3")}");
+        sb.AppendLine($"W : {e.Reading.Orientation.W.ToString("N3")}");
         lblOrientationSensor.Text = sb.ToString();
     }
 
     private void Magnetometer_ReadingChanged(object sender, MagnetometerChangedEventArgs e)
     {
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
-        sb.AppendLine($"X : {e.Reading.MagneticField.X}");
-        sb.AppendLine($"Y : {e.Reading.MagneticField.Y}");
-        sb.AppendLine($"Z : {e.Reading.MagneticField.Z}");
+        sb.AppendLine($"X : {e.Reading.MagneticField.X.ToString("N3")}");
+        sb.AppendLine($"Y : {e.Reading.MagneticField.Y.ToString("N3")}");
+        sb.AppendLine($"Z : {e.Reading.MagneticField.Z.ToString("N3")}");
         lblMagnetometer.Text = sb.ToString();
     }
 
     private void Gyroscope_ReadingChanged(object sender, GyroscopeChangedEventArgs e)
     {
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
-        sb.AppendLine($"X : {e.Reading.AngularVelocity.X}");
-        sb.AppendLine($"Y : {e.Reading.AngularVelocity.Y}");
-        sb.AppendLine($"Z : {e.Reading.AngularVelocity.Z}");
+        sb.AppendLine($"X : {e.Reading.AngularVelocity.X.ToString("N3")}");
+        sb.AppendLine($"Y : {e.Reading.AngularVelocity.Y.ToString("N3")}");
+        sb.AppendLine($"Z : {e.Reading.AngularVelocity.Z.ToString("N3")}");
         lblGyroscope.Text = sb.ToString();
     }
 
     private void Compass_ReadingChanged(object sender, CompassChangedEventArgs e)
     {
-        lblCompass.Text = e.Reading.HeadingMagneticNorth.ToString();
+        lblCompass.Text = e.Reading.HeadingMagneticNorth.ToString("N3");
         imgCompass.RotateTo((e.Reading.HeadingMagneticNorth) * 250 / 360);
     }
 
     private void Barometer_ReadingChanged(object sender, BarometerChangedEventArgs e)
     {
-        lblBarometer.Text = "(hPa) " + e.Reading.PressureInHectopascals.ToString();
+        lblBarometer.Text = "(hPa) " + e.Reading.PressureInHectopascals.ToString("N3");
     }
 
     private void Accelerometer_ReadingChanged(object sender, AccelerometerChangedEventArgs e)
     {
         // Update UI Label with accelerometer state
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
-        sb.AppendLine($"X : {e.Reading.Acceleration.X}");
-        sb.AppendLine($"Y : {e.Reading.Acceleration.Y}");
-        sb.AppendLine($"Z : {e.Reading.Acceleration.Z}");
+        sb.AppendLine($"X : {e.Reading.Acceleration.X.ToString("N3")}");
+        sb.AppendLine($"Y : {e.Reading.Acceleration.Y.ToString("N3")}");
+        sb.AppendLine($"Z : {e.Reading.Acceleration.Z.ToString("N3")}");
         lblAccel.Text = sb.ToString();
     }
 
@@ -191,6 +191,32 @@ public partial class MainPage : ContentPage
         lblOrientation.Text = DeviceDisplay.Current.MainDisplayInfo.Orientation.ToString();
         lblRotation.Text = DeviceDisplay.Current.MainDisplayInfo.Rotation.ToString();
         lblRefreshRate.Text = DeviceDisplay.Current.MainDisplayInfo.RefreshRate.ToString("##.##");
+
+
+        if (OperatingSystem.IsAndroid())
+        {
+            temp.Text = " Board : " + Android.OS.Build.Board
+            + "\n\n Bootloader : " + Android.OS.Build.Bootloader
+            + "\n\n Brand : " + Android.OS.Build.Brand
+            + "\n\n Display : " + Android.OS.Build.Display
+            + "\n\n Fingerprint : " + Android.OS.Build.Fingerprint
+            + "\n\n Serial : " + Android.OS.Build.Serial
+            + "\n\n Hardware : " + Android.OS.Build.Hardware
+            + "\n\n Host : " + Android.OS.Build.Host
+            + "\n\n OdmSku : " + Android.OS.Build.OdmSku
+            + "\n\n Product : " + Android.OS.Build.Product
+            + "\n\n RadioVersion : " + Android.OS.Build.RadioVersion
+            + "\n\n SocManufacturer : " + Android.OS.Build.SocManufacturer
+            + "\n\n SocModel : " + Android.OS.Build.SocModel
+            + "\n\n Supported32BitAbis : " + String.Join(", ", Android.OS.Build.Supported32BitAbis.ToList())
+            + "\n\n Supported64BitAbis : " + String.Join(", ", Android.OS.Build.Supported64BitAbis.ToList())
+            + "\n\n Time : " + TimeSpan.FromMilliseconds(Android.OS.Build.Time)
+            + "\n\n Type : " + Android.OS.Build.Type
+            + "\n\n User : " + Android.OS.Build.User
+            + "\n\n Codename : " + Android.OS.Build.VERSION.Codename
+            + "\n\n SecurityPatch : " + Android.OS.Build.VERSION.SecurityPatch;
+        }
+        
 
         
     }
