@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-android;net7.0-ios</TargetFrameworks>
+		<TargetFrameworks>net7.0-android</TargetFrameworks>
 		<OutputType>Exe</OutputType>
 		<RootNamespace>MobileNetworkInfo</RootNamespace>
 		<UseMaui>true</UseMaui>
@@ -45,7 +45,7 @@
 	  <AndroidSigningStorePass>oshini123</AndroidSigningStorePass>
 	  <AndroidSigningKeyAlias>supun</AndroidSigningKeyAlias>
 	  <AndroidSigningKeyPass>oshini123</AndroidSigningKeyPass>
-	  <AndroidPackageFormat>aab</AndroidPackageFormat>
+	  <AndroidPackageFormat>apk</AndroidPackageFormat>
 	  <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
 	  <AndroidLinkTool>r8</AndroidLinkTool>
 	</PropertyGroup>
@@ -78,11 +78,15 @@
 	<ItemGroup>
 	  <None Remove="Resources\Images\compass.png" />
 	  <None Remove="Resources\Splash\appicon.svg" />
+	  <None Remove="Properties\PublishProfiles\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\Images\compass.png" />
 	  <BundleResource Include="Resources\Splash\appicon.svg">
 	    <Color>#512BD4</Color>
 	  </BundleResource>
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Properties\PublishProfiles\" />
 	</ItemGroup>
 </Project>
