@@ -1,9 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MobileNetworkInfo.MainPage">
+             xmlns:controls="clr-namespace:Plugin.MauiMTAdmob.Controls;assembly=Plugin.MauiMTAdmob"
+             x:Class="MobileNetworkInfo.MainPage" Shell.NavBarIsVisible="False">
 
-    <ScrollView>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <controls:MTAdView
+            Grid.Column="0"
+            Grid.Row="0"
+            AdSize="FullBanner"
+            IsVisible="True"
+            IsEnabled="True"
+            AdsId="ca-app-pub-9854723982625001/2798089006"
+            VerticalOptions="Start" />
+
+        <ScrollView Grid.Row="1" Grid.Column="0">
         <Grid HorizontalOptions="Start" VerticalOptions="Start" Padding="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
@@ -213,6 +229,8 @@
 
         </Grid>
     </ScrollView>
+
+    </Grid>
 
 </ContentPage>
 

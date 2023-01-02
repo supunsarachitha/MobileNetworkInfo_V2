@@ -1,5 +1,7 @@
 ﻿using System.Runtime.Intrinsics.X86;
+using Microsoft.Maui.Controls.PlatformConfiguration;
 using Microsoft.Maui.Devices.Sensors;
+using Plugin.MauiMTAdmob.Controls;
 
 namespace MobileNetworkInfo;
 
@@ -15,6 +17,8 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
+
+        MTAdView ads = new MTAdView();
 
         Device.BeginInvokeOnMainThread(async () =>
         {
@@ -316,6 +320,8 @@ public partial class MainPage : ContentPage
 
         return sensorPermission;
     }
+
+
 }
 
 
