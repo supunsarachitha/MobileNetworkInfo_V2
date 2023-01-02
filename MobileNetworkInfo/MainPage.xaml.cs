@@ -188,14 +188,12 @@ public partial class MainPage : ContentPage
         lblPlatform.Text = DeviceInfo.Current.Platform.ToString();
         lblDeviceType.Text = DeviceInfo.Current.DeviceType.ToString();
 
-
         lblPixelWidth.Text = DeviceDisplay.Current.MainDisplayInfo.Width.ToString();
         lblPixelHeight.Text = DeviceDisplay.Current.MainDisplayInfo.Height.ToString();
         lblDensity.Text = DeviceDisplay.Current.MainDisplayInfo.Density.ToString();
         lblOrientation.Text = DeviceDisplay.Current.MainDisplayInfo.Orientation.ToString();
         lblRotation.Text = DeviceDisplay.Current.MainDisplayInfo.Rotation.ToString();
         lblRefreshRate.Text = DeviceDisplay.Current.MainDisplayInfo.RefreshRate.ToString("##.##");
-
 
         if (OperatingSystem.IsAndroid())
         {
@@ -209,19 +207,17 @@ public partial class MainPage : ContentPage
             + "\n\n Host : " + Android.OS.Build.Host
             + "\n\n OdmSku : " + Android.OS.Build.OdmSku
             + "\n\n Product : " + Android.OS.Build.Product
-            + "\n\n RadioVersion : " + Android.OS.Build.RadioVersion
-            + "\n\n SocManufacturer : " + Android.OS.Build.SocManufacturer
-            + "\n\n SocModel : " + Android.OS.Build.SocModel
-            + "\n\n Supported32BitAbis : " + String.Join(", ", Android.OS.Build.Supported32BitAbis.ToList())
-            + "\n\n Supported64BitAbis : " + String.Join(", ", Android.OS.Build.Supported64BitAbis.ToList())
+            + "\n\n Radio Version : " + Android.OS.Build.RadioVersion
+            + "\n\n Soc Manufacturer : " + Android.OS.Build.SocManufacturer
+            + "\n\n Soc Model : " + Android.OS.Build.SocModel
+            + "\n\n Supported 32Bit Abis : " + String.Join(", ", Android.OS.Build.Supported32BitAbis.ToList())
+            + "\n\n Supported 64Bit Abis : " + String.Join(", ", Android.OS.Build.Supported64BitAbis.ToList())
             + "\n\n Time : " + TimeSpan.FromMilliseconds(Android.OS.Build.Time)
             + "\n\n Type : " + Android.OS.Build.Type
             + "\n\n User : " + Android.OS.Build.User
-            + "\n\n Codename : " + Android.OS.Build.VERSION.Codename
-            + "\n\n SecurityPatch : " + Android.OS.Build.VERSION.SecurityPatch;
+            + "\n\n Code name : " + Android.OS.Build.VERSION.Codename
+            + "\n\n Security Patch : " + Android.OS.Build.VERSION.SecurityPatch;
         }
-        
-
         
     }
 
