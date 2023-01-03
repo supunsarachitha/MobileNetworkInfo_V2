@@ -13,7 +13,7 @@
         <controls:MTAdView
             Grid.Column="0"
             Grid.Row="0"
-            AdSize="FullBanner"
+            AdSize="Banner"
             IsVisible="True"
             IsEnabled="True"
             AdsId="ca-app-pub-9854723982625001/2798089006"
