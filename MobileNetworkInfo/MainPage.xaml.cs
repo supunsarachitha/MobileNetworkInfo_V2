@@ -14,6 +14,7 @@ public partial class MainPage : ContentPage
     PermissionStatus batteryPermission;
     PermissionStatus networkPermission;
 
+
     public MainPage()
     {
         InitializeComponent();
@@ -29,6 +30,8 @@ public partial class MainPage : ContentPage
             await CheckAndRequestSensorPermission();
 
             ReadDeviceInfo();
+
+            NetworkInfo();
 
             Battery.Default.BatteryInfoChanged += Battery_BatteryInfoChanged;
 
@@ -102,6 +105,11 @@ public partial class MainPage : ContentPage
         });
 
 
+    }
+
+    private void NetworkInfo()
+    {
+        Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
     }
 
     private void Orientation_ReadingChanged(object sender, OrientationSensorChangedEventArgs e)
@@ -318,6 +326,43 @@ public partial class MainPage : ContentPage
     }
 
 
+    
+    public void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+    {
+        if (e.NetworkAccess == NetworkAccess.ConstrainedInternet)
+            Console.WriteLine("Internet access is available but is limited.");
+
+        else if (e.NetworkAccess != NetworkAccess.Internet)
+            Console.WriteLine("Internet access has been lost.");
+
+        // Log each active connection
+        Console.Write("Connections active: ");
+
+        foreach (var item in e.ConnectionProfiles)
+        {
+            switch (item)
+            {
+                case ConnectionProfile.Bluetooth:
+                    //txtConnectivity.Text = "Bluetooth";
+                    break;
+                case ConnectionProfile.Cellular:
+                    Console.Write("Cell");
+                    break;
+                case ConnectionProfile.Ethernet:
+                    Console.Write("Ethernet");
+                    break;
+                case ConnectionProfile.WiFi:
+                    Console.Write("WiFi");
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        Console.WriteLine();
+    }
+
 }
+
 
 
