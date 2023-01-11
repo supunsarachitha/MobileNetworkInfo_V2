@@ -109,7 +109,31 @@ public partial class MainPage : ContentPage
 
     private void NetworkInfo()
     {
-        Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
+        try
+        {
+            NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+
+            if (accessType == NetworkAccess.Internet)
+            {
+                txtConnectivity.Text = "Available";
+            }
+            else
+            {
+                txtConnectivity.Text = "Unavailable";
+            }
+
+
+            IEnumerable<ConnectionProfile> profiles = Connectivity.Current.ConnectionProfiles;
+
+            foreach (var profile in profiles)
+            {
+                txtConnectionType.Text += Enum.GetName(typeof(ConnectionProfile), profile) + "\n";
+            }
+        }
+        catch (Exception ex)
+        {
+
+        }
     }
 
     private void Orientation_ReadingChanged(object sender, OrientationSensorChangedEventArgs e)
@@ -326,41 +350,6 @@ public partial class MainPage : ContentPage
     }
 
 
-    
-    public void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
-    {
-        if (e.NetworkAccess == NetworkAccess.ConstrainedInternet)
-            Console.WriteLine("Internet access is available but is limited.");
-
-        else if (e.NetworkAccess != NetworkAccess.Internet)
-            Console.WriteLine("Internet access has been lost.");
-
-        // Log each active connection
-        Console.Write("Connections active: ");
-
-        foreach (var item in e.ConnectionProfiles)
-        {
-            switch (item)
-            {
-                case ConnectionProfile.Bluetooth:
-                    //txtConnectivity.Text = "Bluetooth";
-                    break;
-                case ConnectionProfile.Cellular:
-                    Console.Write("Cell");
-                    break;
-                case ConnectionProfile.Ethernet:
-                    Console.Write("Ethernet");
-                    break;
-                case ConnectionProfile.WiFi:
-                    Console.Write("WiFi");
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        Console.WriteLine();
-    }
 
 }
 

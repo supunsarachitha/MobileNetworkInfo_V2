@@ -228,9 +228,13 @@
 
              <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="50" Text="Network Information" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" ></Label>
 
-            <Label Grid.Column="0" Grid.Row="51" Text="Orientation Sensor"></Label>
+            <Label Grid.Column="0" Grid.Row="51" Text="Internet"></Label>
+            <Label Grid.Column="1" Grid.Row="51" Text=":"></Label>
+            <Label Grid.Column="2" Grid.Row="51" x:Name="txtConnectivity" FontSize="Small"></Label>
+
+            <Label Grid.Column="0" Grid.Row="52" Text="Profiles"></Label>
             <Label Grid.Column="1" Grid.Row="52" Text=":"></Label>
-            <Label Grid.Column="2" Grid.Row="53" x:Name="txtConnectivity" FontSize="Small"></Label>
+            <Label Grid.Column="2" Grid.Row="52" x:Name="txtConnectionType" FontSize="Small"></Label>
 
             <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="54" Text="" ></Label>
 
