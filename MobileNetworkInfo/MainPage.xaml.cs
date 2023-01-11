@@ -14,6 +14,7 @@ public partial class MainPage : ContentPage
     PermissionStatus batteryPermission;
     PermissionStatus networkPermission;
 
+
     public MainPage()
     {
         InitializeComponent();
@@ -29,6 +30,8 @@ public partial class MainPage : ContentPage
             await CheckAndRequestSensorPermission();
 
             ReadDeviceInfo();
+
+            NetworkInfo();
 
             Battery.Default.BatteryInfoChanged += Battery_BatteryInfoChanged;
 
@@ -102,6 +105,35 @@ public partial class MainPage : ContentPage
         });
 
 
+    }
+
+    private void NetworkInfo()
+    {
+        try
+        {
+            NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+
+            if (accessType == NetworkAccess.Internet)
+            {
+                txtConnectivity.Text = "Available";
+            }
+            else
+            {
+                txtConnectivity.Text = "Unavailable";
+            }
+
+
+            IEnumerable<ConnectionProfile> profiles = Connectivity.Current.ConnectionProfiles;
+
+            foreach (var profile in profiles)
+            {
+                txtConnectionType.Text += Enum.GetName(typeof(ConnectionProfile), profile) + "\n";
+            }
+        }
+        catch (Exception ex)
+        {
+
+        }
     }
 
     private void Orientation_ReadingChanged(object sender, OrientationSensorChangedEventArgs e)
@@ -318,6 +350,8 @@ public partial class MainPage : ContentPage
     }
 
 
+
 }
+
 
 

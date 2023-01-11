@@ -81,6 +81,10 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
             <Label Grid.Column="0" Grid.Row="0"  ></Label>
@@ -128,7 +132,7 @@
 
             <Label Grid.Column="0" Grid.Row="14"  ></Label>
 
-            <Label Grid.ColumnSpan="3" Grid.Row="15" Text="Display Information" FontAttributes="Bold" HorizontalOptions="Start" ></Label>
+            <Label Grid.ColumnSpan="3" Grid.Row="15" Text="Display Information" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" ></Label>
 
             <Label Grid.Column="0" Grid.Row="16"  ></Label>
 
@@ -167,7 +171,7 @@
             <Label Grid.Column="2" Grid.Row="27" x:Name="lblRefreshRate"></Label>
 
             <Label Grid.Column="0" Grid.Row="28"  ></Label>
-            <Label Grid.ColumnSpan="3" Grid.Row="29" Text="Battery Information" FontAttributes="Bold" HorizontalOptions="Start" ></Label>
+            <Label Grid.ColumnSpan="3" Grid.Row="29" Text="Battery Information" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" ></Label>
             <Label Grid.Column="0" Grid.Row="30"  ></Label>
 
             <Label Grid.Column="0" Grid.Row="31" Text="Power Source"></Label>
@@ -181,7 +185,7 @@
             <Label Grid.Column="2" Grid.Row="33" x:Name="lblBatteryState"></Label>
 
             <Label Grid.Column="0" Grid.Row="34"  ></Label>
-            <Label Grid.ColumnSpan="3" Grid.Row="35" Text="Sensor Information" FontAttributes="Bold" HorizontalOptions="Start" ></Label>
+            <Label Grid.ColumnSpan="3" Grid.Row="35" Text="Sensor Information" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" ></Label>
             <Label Grid.Column="0" Grid.Row="36"  ></Label>
 
             <Label Grid.Column="0" Grid.Row="37" Text="Accelerometer"></Label>
@@ -222,10 +226,22 @@
 
             <Label Grid.Column="0" Grid.Row="49"  ></Label>
 
-             <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="50" Text="Other Information" FontAttributes="Bold" HorizontalOptions="Start" ></Label>
-            <Label Grid.Column="0" Grid.Row="51"  ></Label>
+             <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="50" Text="Network Information" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" ></Label>
 
-            <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="52" Text="" x:Name="temp"></Label>
+            <Label Grid.Column="0" Grid.Row="51" Text="Internet"></Label>
+            <Label Grid.Column="1" Grid.Row="51" Text=":"></Label>
+            <Label Grid.Column="2" Grid.Row="51" x:Name="txtConnectivity" FontSize="Small"></Label>
+
+            <Label Grid.Column="0" Grid.Row="52" Text="Profiles"></Label>
+            <Label Grid.Column="1" Grid.Row="52" Text=":"></Label>
+            <Label Grid.Column="2" Grid.Row="52" x:Name="txtConnectionType" FontSize="Small"></Label>
+
+            <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="54" Text="" ></Label>
+
+            <Label Grid.Column="0" Grid.Row="55"  ></Label>
+            <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="56" Text="Other Information" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" ></Label>
+            <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="57" Text="" x:Name="temp"></Label>
+
 
         </Grid>
     </ScrollView>
