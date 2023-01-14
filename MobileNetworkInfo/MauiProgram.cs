@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CommunityToolkit.Maui;
+using Microsoft.Extensions.Logging;
 using Plugin.MauiMTAdmob;
 
 namespace MobileNetworkInfo;
@@ -9,9 +10,11 @@ public static class MauiProgram
 	{
 		var builder = MauiApp.CreateBuilder();
 
+        // Initialise the toolkit
+        builder.UseMauiApp<App>().UseMauiCommunityToolkit();
 
 
-		builder
+        builder
 			.UseMauiApp<App>()
             .UseMauiMTAdmob()
             .ConfigureFonts(fonts =>

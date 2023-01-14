@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Intrinsics.X86;
+using Android.Gms.Ads;
 using Microsoft.Maui.Controls.PlatformConfiguration;
 using Microsoft.Maui.Devices.Sensors;
 using Plugin.MauiMTAdmob.Controls;
@@ -20,6 +21,10 @@ public partial class MainPage : ContentPage
         InitializeComponent();
 
         MTAdView ads = new MTAdView();
+
+#if DEBUG
+        ads.IsEnabled = false;
+#endif
 
         Device.BeginInvokeOnMainThread(async () =>
         {
@@ -133,6 +138,13 @@ public partial class MainPage : ContentPage
         catch (Exception ex)
         {
 
+        }
+        finally
+        {
+            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+            {
+                adview.IsVisible = false;
+            }
         }
     }
 

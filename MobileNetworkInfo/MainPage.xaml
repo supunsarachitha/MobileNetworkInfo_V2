@@ -2,7 +2,37 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:Plugin.MauiMTAdmob.Controls;assembly=Plugin.MauiMTAdmob"
+
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="MobileNetworkInfo.MainPage" Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <Style x:Key="labelStyle1" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontAttributes" Value="Bold" />
+        </Style>
+
+        <Style x:Key="labelStyle2" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="VerticalOptions" Value="Start" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="TextColor" Value="{AppThemeBinding Light=Black, Dark=White}" />
+            <Setter Property="FontAttributes" Value="None" />
+            <Setter Property="Padding" Value="10,0,0,0" />
+        </Style>
+
+        <Style x:Key="frameStyle" TargetType="Frame">
+            <Setter Property="CornerRadius" Value="0" />
+            <Setter Property="HasShadow" Value="True" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="BackgroundColor" Value="#512BD4" />
+        </Style>
+    </ContentPage.Resources>
+
 
     <Grid>
         <Grid.RowDefinitions>
@@ -16,235 +46,367 @@
             AdSize="Banner"
             IsVisible="True"
             IsEnabled="True"
-            AdsId="ca-app-pub-9854723982625001/2798089006"
-            VerticalOptions="Start" />
+            AdsId = "ca-app-pub-9854723982625001/2798089006"
+            VerticalOptions="Start"
+            x:Name="adview"/>
 
         <ScrollView Grid.Row="1" Grid.Column="0">
-        <Grid HorizontalOptions="Start" VerticalOptions="Start" Padding="10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="15"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
+            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="Start" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="110"/>
+                    <ColumnDefinition Width="15"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
 
-            <Label Grid.Column="0" Grid.Row="0"  ></Label>
+                <Label Grid.Column="0" Grid.Row="0"></Label>
 
-            <Label Grid.Column="0" Grid.Row="1" Text="Model"></Label>
-            <Label Grid.Column="1" Grid.Row="1" Text=":"></Label>
-            <Label Grid.Column="2" Grid.Row="1" x:Name="lblModel"></Label>
+                <Label Grid.Column="0" Grid.Row="1" Text="Model" Style="{StaticResource labelStyle2}"></Label>
+                <Label Grid.Column="1" Grid.Row="1" Text=":" Style="{StaticResource labelStyle2}"></Label>
+                <Label Grid.Column="2" Grid.Row="1" x:Name="lblModel" Style="{StaticResource labelStyle2}"></Label>
 
-            <Label Grid.Column="0" Grid.Row="2"  ></Label>
+                <Label Grid.Column="0" Grid.Row="2"  ></Label>
 
-            <Label Grid.Column="0" Grid.Row="3" Text="Manufacturer"></Label>
-            <Label Grid.Column="1" Grid.Row="3" Text=":"></Label>
-            <Label Grid.Column="2" Grid.Row="3" x:Name="lblManufacturer"></Label>
+                <Label Grid.Column="0" Grid.Row="3" Text="Manufacturer" Style="{StaticResource labelStyle2}"></Label>
+                <Label Grid.Column="1" Grid.Row="3" Text=":" Style="{StaticResource labelStyle2}"></Label>
+                <Label Grid.Column="2" Grid.Row="3" x:Name="lblManufacturer" Style="{StaticResource labelStyle2}"></Label>
 
-            <Label Grid.Column="0" Grid.Row="4"  ></Label>
+                <Label Grid.Column="0" Grid.Row="4"  ></Label>
 
-            <Label Grid.Column="0" Grid.Row="5" Text="Name"></Label>
-            <Label Grid.Column="1" Grid.Row="5" Text=":"></Label>
-            <Label Grid.Column="2" Grid.Row="5" x:Name="lblName"></Label>
+                <Label Grid.Column="0" Grid.Row="5" Text="Name" Style="{StaticResource labelStyle2}" ></Label>
+                <Label Grid.Column="1" Grid.Row="5" Text=":" Style="{StaticResource labelStyle2}"></Label>
+                <Label Grid.Column="2" Grid.Row="5" x:Name="lblName" Style="{StaticResource labelStyle2}"></Label>
 
-            <Label Grid.Column="0" Grid.Row="6"  ></Label>
+                <Label Grid.Column="0" Grid.Row="6"  ></Label>
 
-            <Label Grid.Column="0" Grid.Row="7" Text="Version"></Label>
-            <Label Grid.Column="1" Grid.Row="7" Text=":"></Label>
-            <Label Grid.Column="2" Grid.Row="7" x:Name="lblVersionString"></Label>
-            
-            
-            <Label Grid.Column="0" Grid.Row="8"  ></Label>
-
-            <Label Grid.Column="0" Grid.Row="9" Text="Idiom"></Label>
-            <Label Grid.Column="1" Grid.Row="9" Text=":"></Label>
-            <Label Grid.Column="2" Grid.Row="9" x:Name="lblIdiom"></Label>
-            
-            <Label Grid.Column="0" Grid.Row="10"  ></Label>
-
-            <Label Grid.Column="0" Grid.Row="11" Text="Platform"></Label>
-            <Label Grid.Column="1" Grid.Row="11" Text=":"></Label>
-            <Label Grid.Column="2" Grid.Row="11" x:Name="lblPlatform"></Label>
-            
-            <Label Grid.Column="0" Grid.Row="12"  ></Label>
-
-            <Label Grid.Column="0" Grid.Row="13" Text="Device Type"></Label>
-            <Label Grid.Column="1" Grid.Row="13" Text=":"></Label>
-            <Label Grid.Column="2" Grid.Row="13" x:Name="lblDeviceType"></Label>
-
-            <Label Grid.Column="0" Grid.Row="14"  ></Label>
-
-            <Label Grid.ColumnSpan="3" Grid.Row="15" Text="Display Information" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" ></Label>
-
-            <Label Grid.Column="0" Grid.Row="16"  ></Label>
-
-            <Label Grid.Column="0" Grid.Row="17" Text="Pixel Width"></Label>
-            <Label Grid.Column="1" Grid.Row="17" Text=":"></Label>
-            <Label Grid.Column="2" Grid.Row="17" x:Name="lblPixelWidth"></Label>
-
-            <Label Grid.Column="0" Grid.Row="18"  ></Label>
-
-            <Label Grid.Column="0" Grid.Row="19" Text="Pixel Height"></Label>
-            <Label Grid.Column="1" Grid.Row="19" Text=":"></Label>
-            <Label Grid.Column="2" Grid.Row="19" x:Name="lblPixelHeight"></Label>
-
-            <Label Grid.Column="0" Grid.Row="20"  ></Label>
-
-            <Label Grid.Column="0" Grid.Row="21" Text="Pixel Density"></Label>
-            <Label Grid.Column="1" Grid.Row="21" Text=":"></Label>
-            <Label Grid.Column="2" Grid.Row="21" x:Name="lblDensity"></Label>
-
-            <Label Grid.Column="0" Grid.Row="22"  ></Label>
-
-            <Label Grid.Column="0" Grid.Row="23" Text="Orientation"></Label>
-            <Label Grid.Column="1" Grid.Row="23" Text=":"></Label>
-            <Label Grid.Column="2" Grid.Row="23" x:Name="lblOrientation"></Label>
-
-            <Label Grid.Column="0" Grid.Row="24"  ></Label>
-
-            <Label Grid.Column="0" Grid.Row="25" Text="Rotation"></Label>
-            <Label Grid.Column="1" Grid.Row="25" Text=":"></Label>
-            <Label Grid.Column="2" Grid.Row="25" x:Name="lblRotation"></Label>
-
-            <Label Grid.Column="0" Grid.Row="26"  ></Label>
-
-            <Label Grid.Column="0" Grid.Row="27" Text="Refresh Rate"></Label>
-            <Label Grid.Column="1" Grid.Row="27" Text=":"></Label>
-            <Label Grid.Column="2" Grid.Row="27" x:Name="lblRefreshRate"></Label>
-
-            <Label Grid.Column="0" Grid.Row="28"  ></Label>
-            <Label Grid.ColumnSpan="3" Grid.Row="29" Text="Battery Information" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" ></Label>
-            <Label Grid.Column="0" Grid.Row="30"  ></Label>
-
-            <Label Grid.Column="0" Grid.Row="31" Text="Power Source"></Label>
-            <Label Grid.Column="1" Grid.Row="31" Text=":"></Label>
-            <Label Grid.Column="2" Grid.Row="31" x:Name="lblPowerSource"></Label>
-
-            <Label Grid.Column="0" Grid.Row="32"  ></Label>
-
-            <Label Grid.Column="0" Grid.Row="33" Text="Battery State"></Label>
-            <Label Grid.Column="1" Grid.Row="33" Text=":"></Label>
-            <Label Grid.Column="2" Grid.Row="33" x:Name="lblBatteryState"></Label>
-
-            <Label Grid.Column="0" Grid.Row="34"  ></Label>
-            <Label Grid.ColumnSpan="3" Grid.Row="35" Text="Sensor Information" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" ></Label>
-            <Label Grid.Column="0" Grid.Row="36"  ></Label>
-
-            <Label Grid.Column="0" Grid.Row="37" Text="Accelerometer"></Label>
-            <Label Grid.Column="1" Grid.Row="37" Text=":"></Label>
-            <Label Grid.Column="2" Grid.Row="37" x:Name="lblAccel"></Label>
-
-            <Label Grid.Column="0" Grid.Row="38"  ></Label>
-
-            <Label Grid.Column="0" Grid.Row="39" Text="Barometer"></Label>
-            <Label Grid.Column="1" Grid.Row="39" Text=":"></Label>
-            <Label Grid.Column="2" Grid.Row="39" x:Name="lblBarometer"></Label>
-
-            <Label Grid.Column="0" Grid.Row="40"  ></Label>
-
-            <Label Grid.Column="0" Grid.Row="41" Text="Compass"></Label>
-            <Label Grid.Column="1" Grid.Row="41" Text=":"></Label>
-            <Label Grid.Column="2" Grid.Row="41" x:Name="lblCompass"></Label>
-
-            <Image Grid.Column="2" Grid.Row="42" Source="compass.png" x:Name="imgCompass"  Aspect="AspectFit" HeightRequest="50" HorizontalOptions="StartAndExpand"/>
-
-            <Label Grid.Column="0" Grid.Row="43"  ></Label>
-
-            <Label Grid.Column="0" Grid.Row="44" Text="Gyroscope"></Label>
-            <Label Grid.Column="1" Grid.Row="44" Text=":"></Label>
-            <Label Grid.Column="2" Grid.Row="44" x:Name="lblGyroscope"></Label>
-
-            <Label Grid.Column="0" Grid.Row="45"  ></Label>
-
-            <Label Grid.Column="0" Grid.Row="46" Text="Magnetometer"></Label>
-            <Label Grid.Column="1" Grid.Row="46" Text=":"></Label>
-            <Label Grid.Column="2" Grid.Row="46" x:Name="lblMagnetometer"></Label>
-
-            <Label Grid.Column="0" Grid.Row="47"  ></Label>
-
-            <Label Grid.Column="0" Grid.Row="48" Text="Orientation Sensor"></Label>
-            <Label Grid.Column="1" Grid.Row="48" Text=":"></Label>
-            <Label Grid.Column="2" Grid.Row="48" x:Name="lblOrientationSensor" FontSize="Small"></Label>
-
-            <Label Grid.Column="0" Grid.Row="49"  ></Label>
-
-             <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="50" Text="Network Information" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" ></Label>
-
-            <Label Grid.Column="0" Grid.Row="51" Text="Internet"></Label>
-            <Label Grid.Column="1" Grid.Row="51" Text=":"></Label>
-            <Label Grid.Column="2" Grid.Row="51" x:Name="txtConnectivity" FontSize="Small"></Label>
-
-            <Label Grid.Column="0" Grid.Row="52" Text="Profiles"></Label>
-            <Label Grid.Column="1" Grid.Row="52" Text=":"></Label>
-            <Label Grid.Column="2" Grid.Row="52" x:Name="txtConnectionType" FontSize="Small"></Label>
-
-            <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="54" Text="" ></Label>
-
-            <Label Grid.Column="0" Grid.Row="55"  ></Label>
-            <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="56" Text="Other Information" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" ></Label>
-            <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="57" Text="" x:Name="temp"></Label>
+                <Label Grid.Column="0" Grid.Row="7" Text="Version" Style="{StaticResource labelStyle2}"></Label>
+                <Label Grid.Column="1" Grid.Row="7" Text=":" Style="{StaticResource labelStyle2}"></Label>
+                <Label Grid.Column="2" Grid.Row="7" x:Name="lblVersionString" Style="{StaticResource labelStyle2}"></Label>
 
 
-        </Grid>
-    </ScrollView>
+                <Label Grid.Column="0" Grid.Row="8"  ></Label>
+
+                <Label Grid.Column="0" Grid.Row="9" Text="Idiom" Style="{StaticResource labelStyle2}"></Label>
+                <Label Grid.Column="1" Grid.Row="9" Text=":" Style="{StaticResource labelStyle2}"></Label>
+                <Label Grid.Column="2" Grid.Row="9" x:Name="lblIdiom" Style="{StaticResource labelStyle2}"></Label>
+
+                <Label Grid.Column="0" Grid.Row="10"  ></Label>
+
+                <Label Grid.Column="0" Grid.Row="11" Text="Platform" Style="{StaticResource labelStyle2}"></Label>
+                <Label Grid.Column="1" Grid.Row="11" Text=":" Style="{StaticResource labelStyle2}"></Label>
+                <Label Grid.Column="2" Grid.Row="11" x:Name="lblPlatform" Style="{StaticResource labelStyle2}"></Label>
+
+                <Label Grid.Column="0" Grid.Row="12"  ></Label>
+
+                <Label Grid.Column="0" Grid.Row="13" Text="Device Type" Style="{StaticResource labelStyle2}"></Label>
+                <Label Grid.Column="1" Grid.Row="13" Text=":" Style="{StaticResource labelStyle2}"></Label>
+                <Label Grid.Column="2" Grid.Row="13" x:Name="lblDeviceType" Style="{StaticResource labelStyle2}"></Label>
+
+                <Label Grid.Column="0" Grid.Row="14"  ></Label>
+
+                <!--Display Information-->
+
+
+
+                <toolkit:Expander Grid.ColumnSpan="3" Grid.Row="15" Grid.RowSpan="2" IsExpanded="False">
+                    <toolkit:Expander.Header>
+                        <Frame Style="{StaticResource frameStyle}">
+                            <Label Text="Display Information"  Style="{StaticResource labelStyle1}"></Label>
+                        </Frame>
+                    </toolkit:Expander.Header>
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="110"/>
+                            <ColumnDefinition Width="15"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" Grid.Row="0"  ></Label>
+
+                        <Label Grid.Column="0" Grid.Row="1" Text="Pixel Width" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="1" Grid.Row="1" Text=":" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="2" Grid.Row="1" x:Name="lblPixelWidth" Style="{StaticResource labelStyle2}"></Label>
+
+                        <Label Grid.Column="0" Grid.Row="2"  ></Label>
+
+                        <Label Grid.Column="0" Grid.Row="3" Text="Pixel Height" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="1" Grid.Row="3" Text=":" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="2" Grid.Row="3" x:Name="lblPixelHeight" Style="{StaticResource labelStyle2}"></Label>
+
+                        <Label Grid.Column="0" Grid.Row="4"  ></Label>
+
+                        <Label Grid.Column="0" Grid.Row="5" Text="Pixel Density" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="1" Grid.Row="5" Text=":" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="2" Grid.Row="5" x:Name="lblDensity" Style="{StaticResource labelStyle2}"></Label>
+
+                        <Label Grid.Column="0" Grid.Row="6"  ></Label>
+
+                        <Label Grid.Column="0" Grid.Row="7" Text="Orientation" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="1" Grid.Row="7" Text=":" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="2" Grid.Row="7" x:Name="lblOrientation" Style="{StaticResource labelStyle2}"></Label>
+
+                        <Label Grid.Column="0" Grid.Row="8"  ></Label>
+
+                        <Label Grid.Column="0" Grid.Row="9" Text="Rotation" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="1" Grid.Row="9" Text=":" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="2" Grid.Row="9" x:Name="lblRotation" Style="{StaticResource labelStyle2}"></Label>
+
+                        <Label Grid.Column="0" Grid.Row="10"  ></Label>
+
+                        <Label Grid.Column="0" Grid.Row="11" Text="Refresh Rate" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="1" Grid.Row="11" Text=":" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="2" Grid.Row="11" x:Name="lblRefreshRate" Style="{StaticResource labelStyle2}"></Label>
+
+                        <Label Grid.Column="0" Grid.Row="12"  ></Label>
+
+
+                    </Grid>
+                </toolkit:Expander>
+
+
+
+                <toolkit:Expander Grid.ColumnSpan="3" Grid.Row="29" Grid.RowSpan="2" IsExpanded="False">
+                    <toolkit:Expander.Header>
+                        <Frame Style="{StaticResource frameStyle}">
+                            <Label Text="Battery Information" Style="{StaticResource labelStyle1}"></Label>
+                        </Frame>
+                    </toolkit:Expander.Header>
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="110"/>
+                            <ColumnDefinition Width="15"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" Grid.Row="0"  ></Label>
+                        <Label Grid.Column="0" Grid.Row="1" Text="Power Source" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="1" Grid.Row="1" Text=":" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="2" Grid.Row="1" x:Name="lblPowerSource" Style="{StaticResource labelStyle2}"></Label>
+
+                        <Label Grid.Column="0" Grid.Row="2"  ></Label>
+
+                        <Label Grid.Column="0" Grid.Row="3" Text="Battery State" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="1" Grid.Row="3" Text=":" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="2" Grid.Row="3" x:Name="lblBatteryState" Style="{StaticResource labelStyle2}"></Label>
+
+                        <Label Grid.Column="0" Grid.Row="4"  ></Label>
+                    </Grid>
+                </toolkit:Expander>
+
+
+                <toolkit:Expander Grid.ColumnSpan="3" Grid.Row="35" Grid.RowSpan="2" IsExpanded="False">
+                    <toolkit:Expander.Header>
+                        <Frame Style="{StaticResource frameStyle}">
+                            <Label Text="Sensor Information" Style="{StaticResource labelStyle1}"></Label>
+                        </Frame>
+                    </toolkit:Expander.Header>
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="110"/>
+                            <ColumnDefinition Width="15"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" Grid.Row="0"  ></Label>
+
+                        <Label Grid.Column="0" Grid.Row="1" Text="Accelerometer" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="1" Grid.Row="1" Text=":" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="2" Grid.Row="1" x:Name="lblAccel" Style="{StaticResource labelStyle2}"></Label>
+
+                        <Label Grid.Column="0" Grid.Row="2"  ></Label>
+
+                        <Label Grid.Column="0" Grid.Row="3" Text="Barometer" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="1" Grid.Row="3" Text=":" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="2" Grid.Row="3" x:Name="lblBarometer" Style="{StaticResource labelStyle2}"></Label>
+
+                        <Label Grid.Column="0" Grid.Row="4"  ></Label>
+
+                        <Label Grid.Column="0" Grid.Row="5" Text="Compass" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="1" Grid.Row="5" Text=":" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="2" Grid.Row="5" x:Name="lblCompass" Style="{StaticResource labelStyle2}"></Label>
+
+                        <Image Grid.Column="2" Grid.Row="6" Source="compass.png" x:Name="imgCompass"  Aspect="AspectFit" HeightRequest="50" HorizontalOptions="StartAndExpand"/>
+
+                        <Label Grid.Column="0" Grid.Row="7"  ></Label>
+
+                        <Label Grid.Column="0" Grid.Row="8" Text="Gyroscope" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="1" Grid.Row="8" Text=":" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="2" Grid.Row="8" x:Name="lblGyroscope" Style="{StaticResource labelStyle2}"></Label>
+
+                        <Label Grid.Column="0" Grid.Row="9"  ></Label>
+
+                        <Label Grid.Column="0" Grid.Row="10" Text="Magnetometer" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="1" Grid.Row="10" Text=":" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="2" Grid.Row="10" x:Name="lblMagnetometer" Style="{StaticResource labelStyle2}"></Label>
+
+                        <Label Grid.Column="0" Grid.Row="11"  ></Label>
+
+                        <Label Grid.Column="0" Grid.Row="12" Text="Orientation Sensor" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="1" Grid.Row="12" Text=":" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="2" Grid.Row="12" x:Name="lblOrientationSensor" Style="{StaticResource labelStyle2}"></Label>
+
+
+                    </Grid>
+                </toolkit:Expander>
+
+
+                <toolkit:Expander Grid.ColumnSpan="3" Grid.Row="50" Grid.RowSpan="2" IsExpanded="False">
+                    <toolkit:Expander.Header>
+                        <Frame Style="{StaticResource frameStyle}">
+                            <Label  Text="Network Information" Style="{StaticResource labelStyle1}"/>
+                        </Frame>
+                    </toolkit:Expander.Header>
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="110"/>
+                            <ColumnDefinition Width="15"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" Grid.Row="0"  ></Label>
+                        <Label Grid.Column="0" Grid.Row="1" Text="Internet" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="1" Grid.Row="1" Text=":" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="2" Grid.Row="1" x:Name="txtConnectivity" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="0" Grid.Row="2"  ></Label>
+                        <Label Grid.Column="0" Grid.Row="3" Text="Profiles" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="1" Grid.Row="3" Text=":" Style="{StaticResource labelStyle2}"></Label>
+                        <Label Grid.Column="2" Grid.Row="3" x:Name="txtConnectionType" Style="{StaticResource labelStyle2}"></Label>
+
+                    </Grid>
+                </toolkit:Expander>
+
+
+
+                <toolkit:Expander Grid.ColumnSpan="3" Grid.Row="53" Grid.RowSpan="2" IsExpanded="False" >
+                    <toolkit:Expander.Header>
+                        <Frame Style="{StaticResource frameStyle}">
+                            <Label Text="Other Information" Style="{StaticResource labelStyle1}"></Label>
+                        </Frame>
+                    </toolkit:Expander.Header>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+
+                        <Label Grid.Row="0"  ></Label>
+                        <Label Grid.Row="1"  Text="" x:Name="temp" Style="{StaticResource labelStyle2}"></Label>
+                            </Grid>
+
+                    
+                </toolkit:Expander>
+
+
+
+            </Grid>
+        </ScrollView>
 
     </Grid>
 
