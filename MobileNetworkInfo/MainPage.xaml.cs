@@ -2,6 +2,7 @@
 using Android.Gms.Ads;
 using Microsoft.Maui.Controls.PlatformConfiguration;
 using Microsoft.Maui.Devices.Sensors;
+using Plugin.Firebase.CloudMessaging;
 using Plugin.MauiMTAdmob.Controls;
 
 namespace MobileNetworkInfo;
@@ -361,6 +362,14 @@ public partial class MainPage : ContentPage
         return sensorPermission;
     }
 
+
+
+    private async void OnCounterClicked(object sender, EventArgs e)
+    {
+        await CrossFirebaseCloudMessaging.Current.CheckIfValidAsync();
+        var token = await CrossFirebaseCloudMessaging.Current.GetTokenAsync();
+        Console.WriteLine($"FCM token: {token}");
+    }
 
 
 }
