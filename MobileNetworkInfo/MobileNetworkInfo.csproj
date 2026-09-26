@@ -17,7 +17,7 @@
 
 		<!-- Versions: ApplicationVersion is the Play Store versionCode and must increase with every upload -->
 		<ApplicationDisplayVersion>5.0</ApplicationDisplayVersion>
-		<ApplicationVersion>31</ApplicationVersion>
+		<ApplicationVersion>32</ApplicationVersion>
 
 		<!-- Android 6.0+. targetSdkVersion follows the TFM (API 36 / Android 16) -->
 		<SupportedOSPlatformVersion>23.0</SupportedOSPlatformVersion>
