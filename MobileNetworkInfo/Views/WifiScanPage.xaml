@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:views="clr-namespace:MobileNetworkInfo.Views"
+                xmlns:vm="clr-namespace:MobileNetworkInfo.ViewModels"
+                xmlns:res="clr-namespace:MobileNetworkInfo.Resources"
+                x:Class="MobileNetworkInfo.Views.WifiScanPage"
+                x:DataType="vm:WifiScanViewModel"
+                ShowStandardToolbar="False"
+                Title="Wi-Fi scanner">
+
+    <Grid RowDefinitions="Auto,*">
+        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12" Padding="16,8,16,8">
+            <VerticalStackLayout VerticalOptions="Center" Spacing="2">
+                <Label Text="{Binding Status}" FontAttributes="Bold" LineBreakMode="WordWrap" />
+                <Label Text="{Binding BandSummary}" Style="{StaticResource Caption}"
+                       IsVisible="{Binding BandSummary, Converter={StaticResource IsNotEmpty}}" />
+            </VerticalStackLayout>
+            <Grid Grid.Column="1">
+                <Button Text="{Binding ScanButtonText}" Command="{Binding ScanCommand}" IsVisible="{Binding IsScanning, Converter={StaticResource InverseBool}}" />
+                <ActivityIndicator IsRunning="{Binding IsScanning}" IsVisible="{Binding IsScanning}" WidthRequest="32" HeightRequest="32" />
+            </Grid>
+        </Grid>
+
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Networks}">
+            <CollectionView.Footer>
+                <Label Text="Signal: −55 dBm or better is excellent, −67 good, −75 fair, lower is weak."
+                       Style="{StaticResource Caption}" Margin="20,8,20,24" HorizontalTextAlignment="Center" />
+            </CollectionView.Footer>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:WifiNetworkItem">
+                    <Border Style="{StaticResource Card}" Margin="16,5" Padding="14,12">
+                        <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                            <Label Style="{StaticResource Icon}" FontSize="28" Text="{Binding SignalGlyph}" TextColor="{Binding SignalColor}" />
+                            <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                <HorizontalStackLayout Spacing="6">
+                                    <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="15" LineBreakMode="TailTruncation" MaximumWidthRequest="190" />
+                                    <Label Text="{x:Static res:Icons.LockOpen}" FontFamily="{x:Static res:Icons.FontFamily}" FontSize="15"
+                                           TextColor="{StaticResource FairColor}" IsVisible="{Binding IsOpen}" VerticalOptions="Center" />
+                                    <Border IsVisible="{Binding IsConnected}" StrokeThickness="0" StrokeShape="RoundRectangle 8" Padding="6,1" VerticalOptions="Center"
+                                            BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryContainerLight}, Dark={StaticResource PrimaryContainerDark}}">
+                                        <Label Text="Connected" FontSize="11" FontAttributes="Bold"
+                                               TextColor="{AppThemeBinding Light={StaticResource OnPrimaryContainerLight}, Dark={StaticResource OnPrimaryContainerDark}}" />
+                                    </Border>
+                                </HorizontalStackLayout>
+                                <Label Text="{Binding Details}" Style="{StaticResource CardSubtitle}" />
+                                <Label Text="{Binding Bssid}" Style="{StaticResource Caption}" />
+                            </VerticalStackLayout>
+                            <Label Grid.Column="2" Text="{Binding Signal}" FontAttributes="Bold" VerticalOptions="Center" TextColor="{Binding SignalColor}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</views:BasePage>

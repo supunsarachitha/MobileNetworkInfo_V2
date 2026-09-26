@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:views="clr-namespace:MobileNetworkInfo.Views"
+                xmlns:vm="clr-namespace:MobileNetworkInfo.ViewModels"
+                xmlns:controls="clr-namespace:MobileNetworkInfo.Controls"
+                xmlns:res="clr-namespace:MobileNetworkInfo.Resources"
+                x:Class="MobileNetworkInfo.Views.NetworkPage"
+                x:DataType="vm:NetworkViewModel"
+                Title="Network">
+
+    <ScrollView>
+        <VerticalStackLayout Style="{StaticResource PageStack}">
+
+            <!-- Status -->
+            <Border Style="{StaticResource Card}" Padding="18">
+                <VerticalStackLayout Spacing="16">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="16">
+                        <Border Style="{StaticResource IconBadge}" WidthRequest="60" HeightRequest="60" StrokeShape="RoundRectangle 18">
+                            <Label Style="{StaticResource Icon}" FontSize="34" Text="{Binding Glyph}" TextColor="{Binding SignalColor}" />
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                            <Label Text="{Binding Title}" FontSize="22" FontAttributes="Bold" />
+                            <Label Text="{Binding Detail}" Style="{StaticResource CardSubtitle}" FontSize="14"
+                                   IsVisible="{Binding Detail, Converter={StaticResource IsNotEmpty}}" />
+                            <Label Text="{Binding SignalText}" FontSize="14" FontAttributes="Bold" TextColor="{Binding SignalColor}"
+                                   IsVisible="{Binding SignalText, Converter={StaticResource IsNotEmpty}}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                        <Button Text="Wi-Fi scanner" Style="{StaticResource TonalButton}" Command="{Binding OpenWifiScannerCommand}" />
+                        <Button Grid.Column="1" Text="Network settings" Style="{StaticResource TonalButton}"
+                                Command="{Binding OpenSettingsCommand}" CommandParameter="internet" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Location permission explanation -->
+            <Border Style="{StaticResource Card}" IsVisible="{Binding ShowLocationPrompt}"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryContainerLight}, Dark={StaticResource PrimaryContainerDark}}"
+                    Stroke="{StaticResource Transparent}">
+                <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="12">
+                    <Label Style="{StaticResource Icon}" Text="{x:Static res:Icons.Location}" VerticalOptions="Start" />
+                    <VerticalStackLayout Grid.Column="1" Spacing="4">
+                        <Label Text="See more network details" FontAttributes="Bold" FontSize="15"
+                               TextColor="{AppThemeBinding Light={StaticResource OnPrimaryContainerLight}, Dark={StaticResource OnPrimaryContainerDark}}" />
+                        <Label Text="{Binding LocationPromptText}" FontSize="13"
+                               TextColor="{AppThemeBinding Light={StaticResource OnPrimaryContainerLight}, Dark={StaticResource OnPrimaryContainerDark}}" />
+                    </VerticalStackLayout>
+                    <Button Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding LocationButtonText}" Command="{Binding RequestLocationCommand}" />
+                </Grid>
+            </Border>
+
+            <controls:InfoCard Title="Connection" Glyph="{x:Static res:Icons.NetworkCheck}" Items="{Binding Connection}" />
+
+            <controls:InfoCard Title="Wi-Fi" Glyph="{x:Static res:Icons.Wifi}" Items="{Binding Wifi}" IsVisible="{Binding HasWifi}" />
+
+            <controls:InfoCard Title="Mobile network" Glyph="{x:Static res:Icons.SimCard}" Items="{Binding Cellular}" IsVisible="{Binding HasCellular}">
+                <Label Style="{StaticResource Caption}" Margin="0,6,0,0" LineHeight="1.2"
+                       Text="Signal values closer to zero are better: −80 dBm is stronger than −110 dBm. RSRP is signal strength, RSRQ is signal quality and SINR shows how much stronger the signal is than background noise (higher is better)." />
+            </controls:InfoCard>
+
+            <controls:InfoCard Title="Serving cell" Subtitle="The cell tower your phone is using"
+                               Glyph="{x:Static res:Icons.CellTower}" Items="{Binding ServingCell}" IsVisible="{Binding HasServingCell}" />
+
+            <controls:InfoCard Title="IP &amp; DNS" Glyph="{x:Static res:Icons.Lan}" Items="{Binding Addresses}">
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12" Margin="0,8,0,0">
+                    <VerticalStackLayout VerticalOptions="Center">
+                        <Label Text="Public IP" Style="{StaticResource RowLabel}" />
+                        <Label Text="{Binding PublicIp}" FontAttributes="Bold" />
+                    </VerticalStackLayout>
+                    <Button Grid.Column="1" Text="Check" Style="{StaticResource TonalButton}" Command="{Binding CheckPublicIpCommand}" />
+                </Grid>
+            </controls:InfoCard>
+
+            <controls:InfoCard Title="Connection test" Subtitle="Measures how fast popular servers respond"
+                               Glyph="{x:Static res:Icons.Speed}" Items="{Binding Latency}">
+                <VerticalStackLayout Spacing="10" Margin="0,6,0,0">
+                    <Label Style="{StaticResource Caption}" LineHeight="1.2"
+                           Text="Lower is better. Under 50 ms is great for video calls and games; over 200 ms can feel slow." />
+                    <Button Text="Run test" Command="{Binding RunLatencyTestCommand}" />
+                </VerticalStackLayout>
+            </controls:InfoCard>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</views:BasePage>

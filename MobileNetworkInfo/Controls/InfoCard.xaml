@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MobileNetworkInfo.Controls"
+             x:Class="MobileNetworkInfo.Controls.InfoCard">
+    <ContentView.ControlTemplate>
+        <ControlTemplate x:DataType="controls:InfoCard">
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout>
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                        <Border Style="{StaticResource IconBadge}">
+                            <Label Style="{StaticResource Icon}" Text="{Binding Glyph, Source={RelativeSource TemplatedParent}}" />
+                        </Border>
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                            <Label Style="{StaticResource CardTitle}" Text="{Binding Title, Source={RelativeSource TemplatedParent}}" />
+                            <Label Style="{StaticResource CardSubtitle}"
+                                   Text="{Binding Subtitle, Source={RelativeSource TemplatedParent}}"
+                                   IsVisible="{Binding HasSubtitle, Source={RelativeSource TemplatedParent}}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                    <VerticalStackLayout Margin="0,6,0,0"
+                                         BindableLayout.ItemsSource="{Binding Items, Source={RelativeSource TemplatedParent}}"
+                                         BindableLayout.ItemTemplate="{StaticResource InfoRowTemplate}" />
+                    <ContentPresenter />
+                </VerticalStackLayout>
+            </Border>
+        </ControlTemplate>
+    </ContentView.ControlTemplate>
+</ContentView>

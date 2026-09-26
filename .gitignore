@@ -403,3 +403,11 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+# Local signing configuration (contains keystore passwords)
+signing.local.props
+*.keystore
+*.jks
+
+# Claude Code local settings
+.claude/settings.local.json
+.claude/settings.json

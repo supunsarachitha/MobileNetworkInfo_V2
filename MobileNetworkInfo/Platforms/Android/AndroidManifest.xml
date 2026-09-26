@@ -1,17 +1,26 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="lk.stechbuzz.networktoggler" android:versionCode="30" android:versionName="4.3">
-	<application android:allowBackup="true" android:icon="@mipmap/appicon" android:roundIcon="@mipmap/appicon_round" android:supportsRtl="true" android:label="Mobile Network Info">
-		<meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-9854723982625001~1080369578" />
-	</application>
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+	<application
+		android:allowBackup="true"
+		android:icon="@mipmap/appicon"
+		android:roundIcon="@mipmap/appicon_round"
+		android:supportsRtl="true"
+		android:label="Mobile Network Info" />
+
+	<!-- Connection state, link properties and bandwidth estimates -->
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<!-- Latency test and public IP lookup (user initiated) -->
 	<uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="android.permission.BATTERY_STATS" />
-	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<!-- Wi-Fi connection details and nearby network scan -->
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+	<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+	<!-- Android requires location access to read the Wi-Fi name, scan results and cell tower details.
+	     Requested only when the user asks for those details; never used in the background. -->
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-	<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-	<uses-permission android:name="android.permission.BODY_SENSORS" />
-	<uses-permission android:name="android.permission.CALL_PHONE" />
-	<uses-permission android:name="android.permission.READ_PHONE_STATE" />
-	<uses-permission android:name="com.google.android.gms.permission.AD_ID" />
-	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="33" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+	<uses-feature android:name="android.hardware.telephony" android:required="false" />
+	<uses-feature android:name="android.hardware.wifi" android:required="false" />
+	<uses-feature android:name="android.hardware.location" android:required="false" />
+	<uses-feature android:name="android.hardware.location.gps" android:required="false" />
 </manifest>

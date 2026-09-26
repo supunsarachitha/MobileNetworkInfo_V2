@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:views="clr-namespace:MobileNetworkInfo.Views"
+                xmlns:vm="clr-namespace:MobileNetworkInfo.ViewModels"
+                xmlns:res="clr-namespace:MobileNetworkInfo.Resources"
+                x:Class="MobileNetworkInfo.Views.AboutPage"
+                x:DataType="vm:AboutViewModel"
+                ShowStandardToolbar="False"
+                Title="About">
+
+    <ContentPage.Resources>
+        <Style x:Key="LinkRow" TargetType="Grid">
+            <Setter Property="ColumnDefinitions" Value="Auto,*,Auto" />
+            <Setter Property="ColumnSpacing" Value="14" />
+            <Setter Property="Padding" Value="0,12" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Style="{StaticResource PageStack}" Spacing="16">
+
+            <VerticalStackLayout Spacing="6" Margin="0,16,0,8">
+                <Image Source="app_logo.png" WidthRequest="88" HeightRequest="88" HorizontalOptions="Center"
+                       SemanticProperties.Description="App logo" />
+                <Label Text="{Binding AppName}" FontSize="22" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,8,0,0" />
+                <Label Text="{Binding Version}" Style="{StaticResource CardSubtitle}" HorizontalOptions="Center" />
+                <Label Text="Everything about your phone's network, hardware, battery and sensors in one place. No ads, no tracking, no account."
+                       Style="{StaticResource CardSubtitle}" HorizontalTextAlignment="Center" Margin="12,8,12,0" />
+            </VerticalStackLayout>
+
+            <Border Style="{StaticResource Card}" Padding="16,4">
+                <VerticalStackLayout>
+                    <Grid Style="{StaticResource LinkRow}">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenSupportCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Label Style="{StaticResource Icon}" Text="{x:Static res:Icons.Favorite}" TextColor="{StaticResource PoorColor}" />
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                            <Label Text="Support this app" FontAttributes="Bold" />
+                            <Label Text="Free ways to help keep it going" Style="{StaticResource Caption}" />
+                        </VerticalStackLayout>
+                        <Label Grid.Column="2" Style="{StaticResource Icon}" Text="{x:Static res:Icons.ChevronRight}" FontSize="20" />
+                    </Grid>
+                    <BoxView Style="{StaticResource Divider}" />
+                    <Grid Style="{StaticResource LinkRow}">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenWhatsNewCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Label Style="{StaticResource Icon}" Text="{x:Static res:Icons.NewReleases}" />
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                            <Label Text="What's new" FontAttributes="Bold" />
+                            <Label Text="New features and fixes in each version" Style="{StaticResource Caption}" />
+                        </VerticalStackLayout>
+                        <Label Grid.Column="2" Style="{StaticResource Icon}" Text="{x:Static res:Icons.ChevronRight}" FontSize="20" />
+                    </Grid>
+                    <BoxView Style="{StaticResource Divider}" />
+                    <Grid Style="{StaticResource LinkRow}">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding RateCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Label Style="{StaticResource Icon}" Text="{x:Static res:Icons.Star}" TextColor="{StaticResource FairColor}" />
+                        <Label Grid.Column="1" Text="Rate on Google Play" FontAttributes="Bold" VerticalOptions="Center" />
+                        <Label Grid.Column="2" Style="{StaticResource Icon}" Text="{x:Static res:Icons.OpenInNew}" FontSize="18" />
+                    </Grid>
+                    <BoxView Style="{StaticResource Divider}" />
+                    <Grid Style="{StaticResource LinkRow}">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ShareAppCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Label Style="{StaticResource Icon}" Text="{x:Static res:Icons.Share}" />
+                        <Label Grid.Column="1" Text="Share this app" FontAttributes="Bold" VerticalOptions="Center" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="PRIVACY &amp; SOURCE CODE" Style="{StaticResource SectionHeading}" />
+
+            <Border Style="{StaticResource Card}" Padding="16,4">
+                <VerticalStackLayout>
+                    <Grid Style="{StaticResource LinkRow}">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenPrivacyPolicyCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Label Style="{StaticResource Icon}" Text="{x:Static res:Icons.Privacy}" />
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                            <Label Text="Privacy policy" FontAttributes="Bold" />
+                            <Label Text="Nothing about you is collected or stored" Style="{StaticResource Caption}" />
+                        </VerticalStackLayout>
+                        <Label Grid.Column="2" Style="{StaticResource Icon}" Text="{x:Static res:Icons.OpenInNew}" FontSize="18" />
+                    </Grid>
+                    <BoxView Style="{StaticResource Divider}" />
+                    <Grid Style="{StaticResource LinkRow}">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenAppSettingsCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Label Style="{StaticResource Icon}" Text="{x:Static res:Icons.Settings}" />
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                            <Label Text="App permissions" FontAttributes="Bold" />
+                            <Label Text="Review or turn off location access" Style="{StaticResource Caption}" />
+                        </VerticalStackLayout>
+                        <Label Grid.Column="2" Style="{StaticResource Icon}" Text="{x:Static res:Icons.OpenInNew}" FontSize="18" />
+                    </Grid>
+                    <BoxView Style="{StaticResource Divider}" />
+                    <Grid Style="{StaticResource LinkRow}">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenSourceCodeCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Label Style="{StaticResource Icon}" Text="{x:Static res:Icons.Code}" />
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                            <Label Text="Source code" FontAttributes="Bold" />
+                            <Label Text="The full source code is available to view on GitHub" Style="{StaticResource Caption}" />
+                        </VerticalStackLayout>
+                        <Label Grid.Column="2" Style="{StaticResource Icon}" Text="{x:Static res:Icons.OpenInNew}" FontSize="18" />
+                    </Grid>
+                    <BoxView Style="{StaticResource Divider}" />
+                    <Grid Style="{StaticResource LinkRow}">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenLicenseCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Label Style="{StaticResource Icon}" Text="{x:Static res:Icons.Gavel}" />
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                            <Label Text="License" FontAttributes="Bold" />
+                            <Label Text="PolyForm Strict 1.0.0 · no commercial use or redistribution" Style="{StaticResource Caption}" />
+                        </VerticalStackLayout>
+                        <Label Grid.Column="2" Style="{StaticResource Icon}" Text="{x:Static res:Icons.OpenInNew}" FontSize="18" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="Icons: Material Icons by Google (Apache License 2.0)" Style="{StaticResource Caption}" HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </ScrollView>
+</views:BasePage>

@@ -1,15 +1,38 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Shell
     x:Class="MobileNetworkInfo.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:MobileNetworkInfo"
+    xmlns:views="clr-namespace:MobileNetworkInfo.Views"
+    xmlns:res="clr-namespace:MobileNetworkInfo.Resources"
     Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <ShellContent Title="Overview" Route="overview" ContentTemplate="{DataTemplate views:OverviewPage}">
+            <ShellContent.Icon>
+                <FontImageSource FontFamily="{x:Static res:Icons.FontFamily}" Glyph="{x:Static res:Icons.Dashboard}" Size="24" />
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent Title="Network" Route="network" ContentTemplate="{DataTemplate views:NetworkPage}">
+            <ShellContent.Icon>
+                <FontImageSource FontFamily="{x:Static res:Icons.FontFamily}" Glyph="{x:Static res:Icons.CellTower}" Size="24" />
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent Title="Device" Route="device" ContentTemplate="{DataTemplate views:DevicePage}">
+            <ShellContent.Icon>
+                <FontImageSource FontFamily="{x:Static res:Icons.FontFamily}" Glyph="{x:Static res:Icons.Smartphone}" Size="24" />
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent Title="Battery" Route="battery" ContentTemplate="{DataTemplate views:BatteryPage}">
+            <ShellContent.Icon>
+                <FontImageSource FontFamily="{x:Static res:Icons.FontFamily}" Glyph="{x:Static res:Icons.Battery}" Size="24" />
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent Title="Sensors" Route="sensors" ContentTemplate="{DataTemplate views:SensorsPage}">
+            <ShellContent.Icon>
+                <FontImageSource FontFamily="{x:Static res:Icons.FontFamily}" Glyph="{x:Static res:Icons.Sensors}" Size="24" />
+            </ShellContent.Icon>
+        </ShellContent>
+    </TabBar>
 
 </Shell>
-

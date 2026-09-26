@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:views="clr-namespace:MobileNetworkInfo.Views"
+                xmlns:vm="clr-namespace:MobileNetworkInfo.ViewModels"
+                xmlns:controls="clr-namespace:MobileNetworkInfo.Controls"
+                xmlns:res="clr-namespace:MobileNetworkInfo.Resources"
+                x:Class="MobileNetworkInfo.Views.SensorsPage"
+                x:DataType="vm:SensorsViewModel"
+                Title="Sensors">
+
+    <ScrollView>
+        <VerticalStackLayout Style="{StaticResource PageStack}">
+
+            <Border Style="{StaticResource Card}" IsVisible="{Binding HasCompass}">
+                <VerticalStackLayout Spacing="8">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                        <Border Style="{StaticResource IconBadge}">
+                            <Label Style="{StaticResource Icon}" Text="{x:Static res:Icons.Explore}" />
+                        </Border>
+                        <Label Grid.Column="1" Text="Compass" Style="{StaticResource CardTitle}" />
+                    </Grid>
+                    <controls:CompassView Heading="{Binding Heading}" HeightRequest="250" WidthRequest="250" HorizontalOptions="Center" />
+                    <Label Text="{Binding HeadingText}" FontSize="28" FontAttributes="Bold" HorizontalOptions="Center" />
+                    <Label Text="Magnetic north. Move the phone in a figure 8 to calibrate."
+                           Style="{StaticResource Caption}" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </Border>
+
+            <controls:InfoCard Title="Orientation" Subtitle="Device tilt and rotation"
+                               Glyph="{x:Static res:Icons.Rotation}" Items="{Binding Orientation}" IsVisible="{Binding HasOrientation}" />
+            <controls:InfoCard Title="Accelerometer" Subtitle="Acceleration including gravity"
+                               Glyph="{x:Static res:Icons.Vibration}" Items="{Binding Accelerometer}" IsVisible="{Binding HasAccelerometer}" />
+            <controls:InfoCard Title="Gyroscope" Subtitle="Rotation speed"
+                               Glyph="{x:Static res:Icons.Rotation}" Items="{Binding Gyroscope}" IsVisible="{Binding HasGyroscope}" />
+            <controls:InfoCard Title="Magnetometer" Subtitle="Magnetic field strength"
+                               Glyph="{x:Static res:Icons.Compass}" Items="{Binding Magnetometer}" IsVisible="{Binding HasMagnetometer}" />
+            <controls:InfoCard Title="Environment" Glyph="{x:Static res:Icons.Lightbulb}" Items="{Binding Environment}" IsVisible="{Binding HasEnvironment}" />
+            <controls:InfoCard Title="All sensors" Subtitle="{Binding SensorCount}" Glyph="{x:Static res:Icons.Sensors}" Items="{Binding AllSensors}" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</views:BasePage>

@@ -1,0 +1,13 @@
+<!--
+	Copy this file to signing.local.props (git-ignored) and fill in your upload key details.
+	Release builds are then signed automatically.
+	Passwords can also be read from environment variables: <AndroidSigningStorePass>env:KEYSTORE_PASS</AndroidSigningStorePass>
+-->
+<Project>
+	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
+		<AndroidSigningKeyStore>/path/to/your.keystore</AndroidSigningKeyStore>
+		<AndroidSigningKeyAlias>your-alias</AndroidSigningKeyAlias>
+		<AndroidSigningStorePass>env:KEYSTORE_PASS</AndroidSigningStorePass>
+		<AndroidSigningKeyPass>env:KEYSTORE_PASS</AndroidSigningKeyPass>
+	</PropertyGroup>
+</Project>
