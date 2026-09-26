@@ -1,67 +1,55 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-android</TargetFrameworks>
+		<TargetFramework>net10.0-android</TargetFramework>
 		<OutputType>Exe</OutputType>
 		<RootNamespace>MobileNetworkInfo</RootNamespace>
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>MobileNetworkInfo</ApplicationTitle>
+		<ApplicationTitle>Mobile Network Info</ApplicationTitle>
 
-		<!-- App Identifier -->
-		<ApplicationId>com.companyname.mobilenetworkinfo</ApplicationId>
-		<ApplicationIdGuid>4ad73ca9-d8a4-4b37-a99a-6827a4e6fc52</ApplicationIdGuid>
+		<!-- App identifier: must match the Google Play listing -->
+		<ApplicationId>lk.stechbuzz.networktoggler</ApplicationId>
 
-		<!-- Versions -->
-		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-		<ApplicationVersion>1</ApplicationVersion>
+		<!-- Versions: ApplicationVersion is the Play Store versionCode and must increase with every upload -->
+		<ApplicationDisplayVersion>5.0</ApplicationDisplayVersion>
+		<ApplicationVersion>31</ApplicationVersion>
 
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
-		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
-		<Configurations>Release;Debug</Configurations>
+		<!-- Android 6.0+. targetSdkVersion follows the TFM (API 36 / Android 16) -->
+		<SupportedOSPlatformVersion>23.0</SupportedOSPlatformVersion>
+
+		<!-- .NET 10 builds 64-bit only by default; keep 32-bit ARM for older and Android Go phones -->
+		<RuntimeIdentifiers>android-arm;android-arm64;android-x64</RuntimeIdentifiers>
+
+		<!-- Compile bindings that use Source={RelativeSource ...} too (faster, trim-safe) -->
+		<MauiEnableXamlCBindingWithSourceCompilation>true</MauiEnableXamlCBindingWithSourceCompilation>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
-	  <EnableCodeSigning>False</EnableCodeSigning>
-	  <CreatePackage>false</CreatePackage>
+	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
+		<!-- .aab is uploaded to Google Play, .apk is for direct installs / testing -->
+		<AndroidPackageFormats>aab;apk</AndroidPackageFormats>
 	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android|AnyCPU'">
-	  <AndroidKeyStore>True</AndroidKeyStore>
-	  <AndroidSigningKeyStore>/Users/supun/Documents/android_Keystore/supun.keystore</AndroidSigningKeyStore>
-	  <AndroidSigningStorePass>oshini123</AndroidSigningStorePass>
-	  <AndroidSigningKeyAlias>supun</AndroidSigningKeyAlias>
-	  <AndroidSigningKeyPass>oshini123</AndroidSigningKeyPass>
+
+	<!--
+		Release signing. Keystore details are kept out of source control: put them in
+		signing.local.props (git-ignored, see signing.local.props.example) or pass them
+		on the command line, e.g. -p:AndroidSigningStorePass=env:KEYSTORE_PASS
+	-->
+	<Import Project="signing.local.props" Condition="Exists('signing.local.props')" />
+	<PropertyGroup Condition="'$(Configuration)' == 'Release' and '$(AndroidSigningKeyStore)' != ''">
+		<AndroidKeyStore>true</AndroidKeyStore>
 	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-android|AnyCPU'">
-	  <AndroidKeyStore>True</AndroidKeyStore>
-	  <AndroidSigningKeyStore>/Users/supun/Documents/android_Keystore/supun.keystore</AndroidSigningKeyStore>
-	  <AndroidSigningStorePass>oshini123</AndroidSigningStorePass>
-	  <AndroidSigningKeyAlias>supun</AndroidSigningKeyAlias>
-	  <AndroidSigningKeyPass>oshini123</AndroidSigningKeyPass>
-	  <AndroidPackageFormat>aab</AndroidPackageFormat>
-	  <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
-	  <AndroidLinkTool>r8</AndroidLinkTool>
-	</PropertyGroup>
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-	  <DebugSymbols>true</DebugSymbols>
-	  <WarningLevel>4</WarningLevel>
-	</PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-ios|AnyCPU'">
-	  <CreatePackage>false</CreatePackage>
-	</PropertyGroup>
+
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#0A8F63" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\appicon.svg" Color="#FFFFFF" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#0A8F63" BaseSize="192,192" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -69,26 +57,15 @@
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+
+		<!-- The repository changelog is shown in the app's "What's new" page -->
+		<MauiAsset Include="..\CHANGELOG.md" LogicalName="CHANGELOG.md" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
-		<PackageReference Include="Plugin.MauiMTAdmob" Version="1.0.2" />
-		<PackageReference Include="CommunityToolkit.Maui" Version="3.1.0" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.110" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.12" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <None Remove="Resources\Images\compass.png" />
-	  <None Remove="Resources\Splash\appicon.svg" />
-	  <None Remove="Properties\PublishProfiles\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <BundleResource Include="Resources\Images\compass.png" />
-	  <BundleResource Include="Resources\Splash\appicon.svg">
-	    <Color>#512BD4</Color>
-	  </BundleResource>
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Properties\PublishProfiles\" />
-	</ItemGroup>
 </Project>

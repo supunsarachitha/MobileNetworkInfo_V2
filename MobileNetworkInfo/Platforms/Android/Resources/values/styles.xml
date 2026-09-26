@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Overrides MAUI's app bar style so the area behind the status bar (edge-to-edge on Android 15+)
+         uses the page background instead of colorPrimary. -->
+    <style name="MauiAppBarLayout" parent="ThemeOverlay.AppCompat.DayNight.ActionBar">
+        <item name="android:background">@color/app_bar_background</item>
+    </style>
+</resources>

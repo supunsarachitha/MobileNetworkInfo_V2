@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:views="clr-namespace:MobileNetworkInfo.Views"
+                xmlns:vm="clr-namespace:MobileNetworkInfo.ViewModels"
+                xmlns:controls="clr-namespace:MobileNetworkInfo.Controls"
+                xmlns:res="clr-namespace:MobileNetworkInfo.Resources"
+                x:Class="MobileNetworkInfo.Views.BatteryPage"
+                x:DataType="vm:BatteryViewModel"
+                Title="Battery">
+
+    <ScrollView>
+        <VerticalStackLayout Style="{StaticResource PageStack}">
+
+            <Border Style="{StaticResource Card}" Padding="20,24">
+                <VerticalStackLayout Spacing="14">
+                    <Grid WidthRequest="190" HeightRequest="190" HorizontalOptions="Center">
+                        <controls:RingGauge Progress="{Binding Fraction}" RingColor="{Binding RingColor}" Thickness="16" />
+                        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="0">
+                            <Label Text="{Binding Glyph}" FontFamily="{x:Static res:Icons.FontFamily}" FontSize="26"
+                                   TextColor="{Binding RingColor}" HorizontalOptions="Center" />
+                            <Label Text="{Binding LevelText}" FontSize="40" FontAttributes="Bold" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                    </Grid>
+                    <Label Text="{Binding StatusText}" FontSize="17" FontAttributes="Bold" HorizontalOptions="Center" />
+                    <Label Text="{Binding Hint}" Style="{StaticResource CardSubtitle}" HorizontalOptions="Center"
+                           IsVisible="{Binding Hint, Converter={StaticResource IsNotEmpty}}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <controls:InfoCard Title="Battery details" Glyph="{x:Static res:Icons.Health}" Items="{Binding Details}" />
+
+            <Label Text="Current, capacity and cycle count come from the battery controller and are only as accurate as your device reports them."
+                   Style="{StaticResource Caption}" Margin="4,0" />
+        </VerticalStackLayout>
+    </ScrollView>
+</views:BasePage>

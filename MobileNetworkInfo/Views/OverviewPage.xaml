@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:views="clr-namespace:MobileNetworkInfo.Views"
+                xmlns:vm="clr-namespace:MobileNetworkInfo.ViewModels"
+                xmlns:controls="clr-namespace:MobileNetworkInfo.Controls"
+                xmlns:res="clr-namespace:MobileNetworkInfo.Resources"
+                x:Class="MobileNetworkInfo.Views.OverviewPage"
+                x:DataType="vm:OverviewViewModel"
+                Title="Overview">
+
+    <ScrollView>
+        <VerticalStackLayout Style="{StaticResource PageStack}">
+
+            <!-- Shown once after an update -->
+            <Border Style="{StaticResource Card}" IsVisible="{Binding ShowUpdateBanner}" Padding="16,12"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryContainerLight}, Dark={StaticResource PrimaryContainerDark}}"
+                    Stroke="{StaticResource Transparent}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenWhatsNewCommand}" />
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                    <Label Style="{StaticResource Icon}" Text="{x:Static res:Icons.NewReleases}" />
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                        <Label Text="{Binding UpdateTitle}" FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light={StaticResource OnPrimaryContainerLight}, Dark={StaticResource OnPrimaryContainerDark}}" />
+                        <Label Text="Tap to see what's new" FontSize="13"
+                               TextColor="{AppThemeBinding Light={StaticResource OnPrimaryContainerLight}, Dark={StaticResource OnPrimaryContainerDark}}" />
+                    </VerticalStackLayout>
+                    <Label Grid.Column="2" Style="{StaticResource Icon}" Text="{x:Static res:Icons.Close}" FontSize="20" Padding="8"
+                           SemanticProperties.Description="Dismiss" AutomationProperties.IsInAccessibleTree="True">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding DismissUpdateCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+            </Border>
+
+            <!-- Device hero -->
+            <Border StrokeThickness="0" StrokeShape="RoundRectangle 24" Padding="20">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Offset="0" Color="{AppThemeBinding Light={StaticResource HeroStartLight}, Dark={StaticResource HeroStartDark}}" />
+                        <GradientStop Offset="1" Color="{AppThemeBinding Light={StaticResource HeroEndLight}, Dark={StaticResource HeroEndDark}}" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="12">
+                    <Label Text="{Binding DeviceName}" FontSize="24" FontAttributes="Bold" TextColor="White" LineBreakMode="WordWrap" />
+                    <Label Grid.Row="1" Text="{Binding DeviceSubtitle}" FontSize="14" TextColor="#E6FFFFFF" Margin="0,2,0,0" />
+                    <Label Grid.Row="2" Text="{Binding Uptime}" FontSize="13" TextColor="#B3FFFFFF" Margin="0,10,0,0" />
+                    <Label Grid.Column="1" Grid.RowSpan="3" Text="{x:Static res:Icons.Smartphone}" FontFamily="{x:Static res:Icons.FontFamily}"
+                           FontSize="64" TextColor="#33FFFFFF" VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <!-- Connection -->
+            <Border Style="{StaticResource Card}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoToCommand}" CommandParameter="network" />
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="14">
+                    <Border Style="{StaticResource IconBadge}" WidthRequest="52" HeightRequest="52" StrokeShape="RoundRectangle 16">
+                        <Label Style="{StaticResource Icon}" FontSize="28" Text="{Binding NetworkGlyph}" TextColor="{Binding NetworkColor}" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="1">
+                        <Label Text="CONNECTION" Style="{StaticResource Caption}" FontAttributes="Bold" CharacterSpacing="0.8" />
+                        <Label Text="{Binding NetworkTitle}" Style="{StaticResource CardTitle}" />
+                        <Label Text="{Binding NetworkDetail}" Style="{StaticResource CardSubtitle}" IsVisible="{Binding NetworkDetail, Converter={StaticResource IsNotEmpty}}" />
+                        <Label Text="{Binding NetworkSignal}" FontSize="13" FontAttributes="Bold" TextColor="{Binding NetworkColor}"
+                               IsVisible="{Binding NetworkSignal, Converter={StaticResource IsNotEmpty}}" />
+                    </VerticalStackLayout>
+                    <Label Grid.Column="2" Style="{StaticResource Icon}" Text="{x:Static res:Icons.ChevronRight}"
+                           TextColor="{AppThemeBinding Light={StaticResource TextSecondaryLight}, Dark={StaticResource TextSecondaryDark}}" />
+                </Grid>
+            </Border>
+
+            <!-- Health at a glance -->
+            <Border Style="{StaticResource Card}" Padding="12,16">
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+
+                    <VerticalStackLayout Spacing="6">
+                        <VerticalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoToCommand}" CommandParameter="battery" />
+                        </VerticalStackLayout.GestureRecognizers>
+                        <Grid WidthRequest="84" HeightRequest="84" HorizontalOptions="Center">
+                            <controls:RingGauge Progress="{Binding BatteryFraction}" RingColor="{Binding BatteryColor}" Thickness="9" />
+                            <Label Text="{Binding BatteryPercent}" FontSize="17" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Grid>
+                        <Label Text="Battery" FontAttributes="Bold" HorizontalOptions="Center" />
+                        <Label Text="{Binding BatteryStatus}" Style="{StaticResource Caption}" HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Column="1" Spacing="6">
+                        <VerticalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoToCommand}" CommandParameter="device" />
+                        </VerticalStackLayout.GestureRecognizers>
+                        <Grid WidthRequest="84" HeightRequest="84" HorizontalOptions="Center">
+                            <controls:RingGauge Progress="{Binding RamFraction}" RingColor="{StaticResource InfoColor}" Thickness="9" />
+                            <Label Text="{Binding RamText}" FontSize="17" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Grid>
+                        <Label Text="Memory" FontAttributes="Bold" HorizontalOptions="Center" />
+                        <Label Text="{Binding RamDetail}" Style="{StaticResource Caption}" HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Column="2" Spacing="6">
+                        <VerticalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoToCommand}" CommandParameter="device" />
+                        </VerticalStackLayout.GestureRecognizers>
+                        <Grid WidthRequest="84" HeightRequest="84" HorizontalOptions="Center">
+                            <controls:RingGauge Progress="{Binding StorageFraction}" RingColor="{StaticResource FairColor}" Thickness="9" />
+                            <Label Text="{Binding StorageText}" FontSize="17" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </Grid>
+                        <Label Text="Storage" FontAttributes="Bold" HorizontalOptions="Center" />
+                        <Label Text="{Binding StorageDetail}" Style="{StaticResource Caption}" HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <!-- Quick settings -->
+            <Label Text="QUICK SETTINGS" Style="{StaticResource SectionHeading}" />
+            <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="12">
+                <Border Style="{StaticResource Card}" Padding="14">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OpenSettingsCommand}" CommandParameter="internet" />
+                    </Border.GestureRecognizers>
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Style="{StaticResource Icon}" Text="{x:Static res:Icons.Tune}" TextColor="{AppThemeBinding Light={StaticResource PrimaryLight}, Dark={StaticResource PrimaryDark}}" />
+                        <Label Text="Internet" FontAttributes="Bold" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                </Border>
+                <Border Grid.Column="1" Style="{StaticResource Card}" Padding="14">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OpenSettingsCommand}" CommandParameter="wifi" />
+                    </Border.GestureRecognizers>
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Style="{StaticResource Icon}" Text="{x:Static res:Icons.Wifi}" TextColor="{AppThemeBinding Light={StaticResource PrimaryLight}, Dark={StaticResource PrimaryDark}}" />
+                        <Label Text="Wi-Fi" FontAttributes="Bold" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                </Border>
+                <Border Grid.Row="1" Style="{StaticResource Card}" Padding="14">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OpenSettingsCommand}" CommandParameter="mobile" />
+                    </Border.GestureRecognizers>
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Style="{StaticResource Icon}" Text="{x:Static res:Icons.SimCard}" TextColor="{AppThemeBinding Light={StaticResource PrimaryLight}, Dark={StaticResource PrimaryDark}}" />
+                        <Label Text="Mobile network" FontAttributes="Bold" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource Card}" Padding="14" IsVisible="{Binding HasDataUsageSettings}">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OpenSettingsCommand}" CommandParameter="data" />
+                    </Border.GestureRecognizers>
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Style="{StaticResource Icon}" Text="{x:Static res:Icons.DataUsage}" TextColor="{AppThemeBinding Light={StaticResource PrimaryLight}, Dark={StaticResource PrimaryDark}}" />
+                        <Label Text="Data usage" FontAttributes="Bold" VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                </Border>
+            </Grid>
+
+            <!-- Report -->
+            <Border Style="{StaticResource Card}">
+                <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" ColumnSpacing="12" RowSpacing="12">
+                    <Border Style="{StaticResource IconBadge}">
+                        <Label Style="{StaticResource Icon}" Text="{x:Static res:Icons.Share}" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                        <Label Text="Device report" Style="{StaticResource CardTitle}" />
+                        <Label Text="Share every detail as text, handy for tech support or when selling your phone. It includes network names and IP addresses, so check it before posting publicly." Style="{StaticResource CardSubtitle}" />
+                    </VerticalStackLayout>
+                    <Button Grid.Row="1" Grid.ColumnSpan="2" Text="Share report" Command="{Binding ShareCommand}" />
+                </Grid>
+            </Border>
+
+            <!-- Support -->
+            <Border Style="{StaticResource Card}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenSupportCommand}" />
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                    <Border Style="{StaticResource IconBadge}">
+                        <Label Style="{StaticResource Icon}" Text="{x:Static res:Icons.Favorite}" TextColor="{StaticResource PoorColor}" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                        <Label Text="Enjoying the app?" Style="{StaticResource CardTitle}" />
+                        <Label Text="It's free and has no ads. See how you can help." Style="{StaticResource CardSubtitle}" />
+                    </VerticalStackLayout>
+                    <Label Grid.Column="2" Style="{StaticResource Icon}" Text="{x:Static res:Icons.ChevronRight}"
+                           TextColor="{AppThemeBinding Light={StaticResource TextSecondaryLight}, Dark={StaticResource TextSecondaryDark}}" />
+                </Grid>
+            </Border>
+
+            <Label Text="Tip: tap any value to copy it." Style="{StaticResource Caption}" HorizontalOptions="Center" Margin="0,4,0,0" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</views:BasePage>

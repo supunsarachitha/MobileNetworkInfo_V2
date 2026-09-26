@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:views="clr-namespace:MobileNetworkInfo.Views"
+                xmlns:vm="clr-namespace:MobileNetworkInfo.ViewModels"
+                xmlns:controls="clr-namespace:MobileNetworkInfo.Controls"
+                xmlns:res="clr-namespace:MobileNetworkInfo.Resources"
+                x:Class="MobileNetworkInfo.Views.DevicePage"
+                x:DataType="vm:DeviceViewModel"
+                Title="Device">
+
+    <ScrollView>
+        <VerticalStackLayout Style="{StaticResource PageStack}">
+            <controls:InfoCard Title="{Binding Headline}" Subtitle="{Binding Subtitle}" Glyph="{x:Static res:Icons.Smartphone}" Items="{Binding Device}" />
+            <controls:InfoCard Title="System" Glyph="{x:Static res:Icons.Android}" Items="{Binding SystemInfo}" />
+            <controls:InfoCard Title="Processor" Glyph="{x:Static res:Icons.DeveloperBoard}" Items="{Binding Processor}" />
+            <controls:InfoCard Title="Memory &amp; storage" Glyph="{x:Static res:Icons.Memory}" Items="{Binding Memory}" />
+            <controls:InfoCard Title="Display" Glyph="{x:Static res:Icons.Monitor}" Items="{Binding Display}" />
+            <controls:InfoCard Title="Hardware features" Glyph="{x:Static res:Icons.Hardware}" Items="{Binding Features}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</views:BasePage>

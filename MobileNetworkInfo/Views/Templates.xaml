@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:MobileNetworkInfo.Models"
+    xmlns:controls="clr-namespace:MobileNetworkInfo.Controls"
+    x:Class="MobileNetworkInfo.Views.Templates">
+
+    <controls:IsNotEmptyConverter x:Key="IsNotEmpty" />
+    <controls:InverseBoolConverter x:Key="InverseBool" />
+
+    <!-- Label / value row. Tap to copy the value. -->
+    <DataTemplate x:Key="InfoRowTemplate" x:DataType="models:InfoItem">
+        <Grid ColumnDefinitions="*,1.3*" ColumnSpacing="16" Padding="0,9">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding CopyCommand}" />
+            </Grid.GestureRecognizers>
+            <Label Text="{Binding Label}" Style="{StaticResource RowLabel}" />
+            <Label Grid.Column="1" Text="{Binding Value}" Style="{StaticResource RowValue}" />
+        </Grid>
+    </DataTemplate>
+
+</ResourceDictionary>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:views="clr-namespace:MobileNetworkInfo.Views"
+                xmlns:vm="clr-namespace:MobileNetworkInfo.ViewModels"
+                xmlns:res="clr-namespace:MobileNetworkInfo.Resources"
+                x:Class="MobileNetworkInfo.Views.SupportPage"
+                x:DataType="vm:SupportViewModel"
+                ShowStandardToolbar="False"
+                Title="Support this app">
+
+    <ContentPage.Resources>
+        <Style x:Key="HelpRow" TargetType="Grid">
+            <Setter Property="ColumnDefinitions" Value="Auto,*,Auto" />
+            <Setter Property="ColumnSpacing" Value="14" />
+            <Setter Property="Padding" Value="0,12" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Style="{StaticResource PageStack}" Spacing="16">
+
+            <Border StrokeThickness="0" StrokeShape="RoundRectangle 24" Padding="22">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Offset="0" Color="{AppThemeBinding Light={StaticResource HeroStartLight}, Dark={StaticResource HeroStartDark}}" />
+                        <GradientStop Offset="1" Color="{AppThemeBinding Light={StaticResource HeroEndLight}, Dark={StaticResource HeroEndDark}}" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="{x:Static res:Icons.VolunteerActivism}" FontFamily="{x:Static res:Icons.FontFamily}" FontSize="40" TextColor="White"
+                           AutomationProperties.IsInAccessibleTree="False" />
+                    <Label Text="Free. No ads. No tracking." FontSize="22" FontAttributes="Bold" TextColor="White" />
+                    <Label TextColor="#E6FFFFFF" FontSize="14" LineHeight="1.2"
+                           Text="Mobile Network Info doesn't show ads, doesn't track you and doesn't need an account. It's built and looked after by an independent developer, and your help keeps it going." />
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="WAYS YOU CAN HELP" Style="{StaticResource SectionHeading}" />
+
+            <Border Style="{StaticResource Card}" Padding="16,4">
+                <VerticalStackLayout>
+                    <Grid Style="{StaticResource HelpRow}">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding RateCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Label Style="{StaticResource Icon}" Text="{x:Static res:Icons.Star}" TextColor="{StaticResource FairColor}" />
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                            <Label Text="Rate the app" FontAttributes="Bold" />
+                            <Label Text="A good rating on Google Play helps others find it." Style="{StaticResource Caption}" />
+                        </VerticalStackLayout>
+                        <Label Grid.Column="2" Style="{StaticResource Icon}" Text="{x:Static res:Icons.ChevronRight}" FontSize="20" />
+                    </Grid>
+                    <BoxView Style="{StaticResource Divider}" />
+                    <Grid Style="{StaticResource HelpRow}">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ShareAppCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Label Style="{StaticResource Icon}" Text="{x:Static res:Icons.Share}" />
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                            <Label Text="Tell a friend" FontAttributes="Bold" />
+                            <Label Text="Share the app with someone who'd find it useful." Style="{StaticResource Caption}" />
+                        </VerticalStackLayout>
+                        <Label Grid.Column="2" Style="{StaticResource Icon}" Text="{x:Static res:Icons.ChevronRight}" FontSize="20" />
+                    </Grid>
+                    <BoxView Style="{StaticResource Divider}" />
+                    <Grid Style="{StaticResource HelpRow}">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ReportProblemCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Label Style="{StaticResource Icon}" Text="{x:Static res:Icons.BugReport}" />
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                            <Label Text="Report a problem or suggest an idea" FontAttributes="Bold" />
+                            <Label Text="Opens the project's issue page on GitHub." Style="{StaticResource Caption}" />
+                        </VerticalStackLayout>
+                        <Label Grid.Column="2" Style="{StaticResource Icon}" Text="{x:Static res:Icons.OpenInNew}" FontSize="18" />
+                    </Grid>
+                    <BoxView Style="{StaticResource Divider}" />
+                    <Grid Style="{StaticResource HelpRow}">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenSourceCodeCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Label Style="{StaticResource Icon}" Text="{x:Static res:Icons.Code}" />
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
+                            <Label Text="Contribute on GitHub" FontAttributes="Bold" />
+                            <Label Text="The source code is on GitHub. Improvements and translations are welcome." Style="{StaticResource Caption}" />
+                        </VerticalStackLayout>
+                        <Label Grid.Column="2" Style="{StaticResource Icon}" Text="{x:Static res:Icons.OpenInNew}" FontSize="18" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="Thank you for using Mobile Network Info!" Style="{StaticResource CardSubtitle}" HorizontalOptions="Center" Margin="0,4,0,0" />
+        </VerticalStackLayout>
+    </ScrollView>
+</views:BasePage>
