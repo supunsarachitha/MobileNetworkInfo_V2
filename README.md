@@ -97,7 +97,7 @@ Other ways to help: ⭐ star this repository, [rate the app on Google Play](http
 
 - [.NET 10 SDK](https://dotnet.microsoft.com/download) with the MAUI workload: `dotnet workload install maui`
 - Android SDK with API 36 (installed with Android Studio or Visual Studio)
-- JDK 17 or 21
+- JDK 21
 
 **Run on a device or emulator**
 
@@ -130,6 +130,7 @@ MobileNetworkInfo/            .NET MAUI app (Android)
 ├── ViewModels/               MVVM view models (CommunityToolkit.Mvvm)
 ├── Services/                 Android APIs: network, device, battery, sensors, report
 ├── Helpers/                  Platform-independent logic (formatting, Wi-Fi channels, signal quality, …)
+├── Models/                   InfoItem and InfoSection data types
 ├── Controls/                 InfoCard, CompassView, RingGauge
 ├── Resources/                Colors, styles, icon font, app icon and splash
 └── Platforms/Android/        Manifest, MainActivity, system bar handling
